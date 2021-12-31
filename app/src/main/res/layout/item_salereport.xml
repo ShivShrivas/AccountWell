@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="12dp"
+            android:singleLine="true"
+            android:id="@+id/text_companyname"
+            android:textColor="@color/colorAccent"
+            android:text="Company Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:textColor="#2E2E2E"
+            android:visibility="visible"
+            android:id="@+id/text_companyaddress"
+            android:textSize="11dp"
+            android:singleLine="true"
+            android:text="Tobacco Leaves"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:textSize="11dp"
+            android:singleLine="true"
+            android:id="@+id/text_date"
+            android:textColor="#2E2E2E"
+            android:text="06/12/2019 | S/1002 | 000002"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="1.6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#07770C"
+                android:id="@+id/text_amount"
+                android:textSize="16dp"
+                android:text="₹ 50,000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/text_tamount"
+                android:gravity="center"
+                android:textSize="10dp"
+                android:singleLine="true"
+                android:text="Total Amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/ic_proceed_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>

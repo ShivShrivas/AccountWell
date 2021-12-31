@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+   <LinearLayout
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="12dp"
+            android:singleLine="true"
+            android:id="@+id/text_companyname"
+            android:textColor="@color/colorAccent"
+            android:text="Company Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:textSize="11dp"
+            android:singleLine="true"
+            android:id="@+id/text_date"
+            android:textColor="#3F3F3F"
+            android:text="06/12/2019 | PURCS | 000002"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/text_balance"
+            android:textSize="11dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#018377"
+            android:singleLine="true"
+            android:text="Balance - 2675"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+    <View
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#5F5F5F"
+        android:layout_width=".5dp"
+        android:layout_height="match_parent">
+    </View>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="1.6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#161616"
+            android:id="@+id/text_amount"
+            android:textSize="16dp"
+            android:singleLine="true"
+            android:text="500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <ImageView
+            android:id="@+id/image_down"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_arrow_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ImageView>
+    </LinearLayout>
+</LinearLayout>

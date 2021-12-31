@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Accountwell</string>
+
+    <string name="activity_image_trans">logo</string>
+    <string name="activity_layout_trans">layout</string>
+    <string name="time_out">TIME OUT</string>
+    <string name="ledger"><u>Stock Ledger</u></string>
+    <string name="login_here">Login here!</string>
+    <string name="user_name">User Name</string>
+    <string name="passwor_hiding">*****</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="show_password">Show password</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="login">login</string>
+    <string name="select_access_point">Select Access Point</string>
+    <string name="financial_year">Financial Year</string>
+    <string name="company">Company</string>
+    <string name="site">Site</string>
+    <string name="submit">submit</string>
+    <string name="cash_summary">Cash Summary</string>
+    <string name="bank_summary">Bank Summary</string>
+    <string name="stock_summary">Stock Summary</string>
+    <string name="creditor_summary">Sundry Summary</string>
+    <string name="turnover">Transaction</string>
+    <string name="accounts">Accounts</string>
+    <string name="analytic_reports">Analytic Reports</string>
+    <string name="labour_management">Labour Management</string>
+    <string name="purchase">Purchase</string>
+    <string name="sale">Sale</string>
+    <string name="employee">Employee</string>
+    <string name="ledger1">Ledger</string>
+    <string name="interest_register">Interest Register</string>
+    <string name="multiple_ledger_report">Multiple Ledger Report</string>
+    <string name="fund_flow">Fund Flow</string>
+    <string name="general_trial_balance">General Trial Balance</string>
+    <string name="group_trial_balance">Group Trial Balance</string>
+    <string name="detailed_trial_balance">Detailed Trial Balance</string>
+    <string-array name="array_bank">
+        <item>All</item>
+        <item>SBI BANK</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

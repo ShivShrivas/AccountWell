@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_btn_blue.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_button_blue.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_button_bluedark.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_button_disable.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_button_green.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_button_yellow.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_edit_brown.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/bg_edit_rec.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/btn_rounded.xml" value="0.20555555555555555" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/card_bg.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/edittext_bg.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/gradiant_green_button.xml" value="0.20555555555555555" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_accounts.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_arrow_down.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_arrow_point_to_right.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_arrowdown.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_balance.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_balance_details.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_bank_svg.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_bar.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_black_male_user_symbol.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_calendar_leave.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_chart.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_chash_summary_svg.xml" value="0.2064814814814815" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_clipboard.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_clipboard_with_pencil.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_creditor.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_creditor_svg.xml" value="0.2064814814814815" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_debit_card.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_dialogbackground_svg.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_dummyimage.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_fund.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_group_balance.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_kg.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_launcher_background.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_ledger.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_lock.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_loginbg_svg.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_logintype_bg_svg.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_minus.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_more.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_my_profile.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_new.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_note.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_notification_small.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_plus.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_proceed_arrow.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_protect.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_reporticon.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_rupee.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_rupee_indian.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_search_icon.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_settings.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_splashbg_svg.xml" value="0.20925925925925926" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_stock_data_analysis.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_stock_svg_ic.xml" value="0.2064814814814815" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_stockin.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_stockout.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_turnover_svg.xml" value="0.2064814814814815" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ic_up_arrow.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/item_cash_summary_new.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/layout_click_blue.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/layout_click_style.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/layout_grey.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/login_button_style.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/profile_background_gradient.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ripple_effect.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/splashbggradient.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/technical_support_card_bg.xml" value="0.22552083333333334" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/trans_gradiant_green.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_account__reports.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_bank__summary.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_cash_summary.xml" value="0.25" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_cash_summary2.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_creditor_summary.xml" value="0.18" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_general__trial__balance.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_labourpayment__report.xml" value="0.221025641025641" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger__account.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login__type.xml" value="0.18" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login_actitivty.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_multiple__ledger__account.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_purchase_report.xml" value="0.221025641025641" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_sale__reports.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_stock__summary.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_stock_summary_new.xml" value="0.20454545454545456" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_transactions_summary.xml" value="0.14601769911504425" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_turnover.xml" value="0.18" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_user_profile.xml" value="0.34536082474226804" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/cell.xml" value="0.221025641025641" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/cell_content_layout.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/dialog_company_code.xml" value="0.209375" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/fragment_credit_.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/fragment_debit_.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_cashsummary.xml" value="0.5" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_vash_summary_new.xml" value="0.25" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/stock_summary_item.xml" value="0.16" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/transaction_summary.xml" value="0.2" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22552083333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

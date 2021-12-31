@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bsninfotech.accountwell"
+    >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.CAMERA"
+        android:required="true"
+        android:requiredFeature="true" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.webkit.PermissionRequest" />
+    <uses-permission android:name="android.webkit.PermissionRequest" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application
+        android:name=".ApplicationControllerAdmin"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Stock_Summary_new"
+            android:exported="false" />
+        <activity
+            android:name=".Transactions_Summary"
+            android:exported="false" />
+        <activity
+            android:name=".Creditor_Summary"
+            android:exported="false" />
+        <activity
+            android:name=".CashSummary"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfile"
+            android:exported="false" />
+        <activity android:name=".General_Trial_Balance" />
+        <activity android:name=".Multiple_Ledger_Account" />
+        <activity android:name=".Ledger_Account" />
+        <activity android:name=".Account_Reports" />
+        <activity android:name=".Labourpayment_Report" />
+        <activity android:name=".Sale_Reports" />
+        <activity android:name=".Analytic_Report" />
+        <activity android:name=".Stock_Ledger" />
+        <activity android:name=".Stock_Summary" />
+        <activity
+            android:name=".Bank_Summary"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Cash_Summary"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Login_Type" />
+        <activity
+            android:name=".Turnover_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login_Actitivty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Purchase_Reports"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Splash_Activity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
+</manifest>

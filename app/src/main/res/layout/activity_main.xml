@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout_dashboard"
+
+
+
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+<LinearLayout
+    android:background="@drawable/layout_bg"
+    android:layout_width="match_parent"
+    android:layout_height="230dp">
+    <LinearLayout
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1.1"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/currentDate_in_mainActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WELCOME ,"
+                android:visibility="gone"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="#ffff"
+                android:layout_marginStart="5dp"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/companyNameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="BSN Infotech Pvt. Ltd."
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Branch - Kanpur"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Financial Year - 2019-2020"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:singleLine="true"
+                android:layout_marginStart="5dp"
+                android:text="Mr. Gaurav Nigam"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/designationTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Designation - Admin"
+                android:textColor="#fff"
+                android:layout_marginStart="5dp"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lastLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:singleLine="true"
+                android:text="Last Login: 24-12-2021"
+                android:textColor="#fff"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:layout_weight="1.9"
+            android:gravity="center|top|right"
+            android:orientation="horizontal"
+            android:padding="5dp">
+<RelativeLayout
+    android:layout_weight="1.9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/notification"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="10dp"
+        android:src="@drawable/notification"
+        app:civ_border_color="@color/cardview_dark_background" />
+</RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1.9"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/online_icon"
+                    android:elevation="15dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_student_dashboard"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+ />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="-60dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginTop="2dp"
+                    android:animateLayoutChanges="true"
+                    android:elevation="15dp"
+
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginBottom="12dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="6dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_cashsummary"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_effect"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="80dp"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+                                            android:text="@string/cash_summary"
+                                            android:textColor="@color/black"
+                                            android:textSize="14dp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10dp">
+
+                                        <ImageView
+                                            android:layout_width="45dp"
+                                            android:layout_height="45dp"
+                                            android:layout_weight="3"
+                                            android:backgroundTintMode="multiply"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:src="@drawable/cash_ic"
+                                            />
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_proceed_arrow" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="#F1F1F1" />
+
+
+                                <LinearLayout
+                                    android:id="@+id/layout_banksummar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:background="@drawable/ripple_effect"
+
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+
+                                            android:text="@string/bank_summary"
+
+                                            android:textColor="@color/black"
+                                            android:textSize="14dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10dp">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="3"
+                                            android:src="@drawable/ic_bank_svg" />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_proceed_arrow" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="#F1F1F1" />
+
+                                <LinearLayout
+                                    android:id="@+id/layout_stocksummar"
+                                    android:layout_width="match_parent"
+
+                                    android:layout_height="80dp"
+                                    android:background="@drawable/ripple_effect"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+
+                                            android:text="@string/stock_summary"
+
+                                            android:textColor="@color/black"
+                                            android:textSize="14dp" />
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10dp">
+
+                                        <ImageView
+                                            android:layout_width="45dp"
+                                            android:layout_height="45dp"
+                                            android:layout_weight="3"
+                                            android:src="@drawable/stock_ic"
+
+                                            />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_proceed_arrow" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="#F1F1F1" />
+
+                                <LinearLayout
+                                    android:id="@+id/creditor_summury"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:background="@drawable/ripple_effect"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+
+                                            android:text="@string/creditor_summary"
+
+                                            android:textColor="@color/black"
+                                            android:textSize="14dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10dp">
+
+
+                                        <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_weight="3"
+                                            android:backgroundTintMode="multiply"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:src="@drawable/ic_creditor_svg"
+                                            />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_proceed_arrow" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="#F1F1F1" />
+
+                                <LinearLayout
+                                    android:id="@+id/layout_turnover"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+
+                                    android:background="@drawable/ripple_effect"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="15dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:singleLine="true"
+
+                                            android:text="@string/turnover"
+
+                                            android:textColor="@color/black"
+                                            android:textSize="14dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="2"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:padding="10dp">
+
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_weight="3"
+                                            android:backgroundTintMode="multiply"
+                                            android:backgroundTint="@color/colorPrimaryDark"
+                                            android:src="@drawable/turnover_ic"
+                                            />
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:src="@drawable/ic_proceed_arrow" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_height="2dp"
+
+                            android:background="#F1F1F1" />
+
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="2dp"
+                            android:alignmentMode="alignMargins"
+                            android:clipToPadding="false"
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:paddingBottom="10dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_AccountReports"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+
+                                    android:background="@drawable/ripple_effect"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/accounts_ic_card" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/accounts"
+                                        android:textColor="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_analyticreport"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_effect"
+
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/reports_analytics_ic" />
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+
+                                        android:singleLine="true"
+                                        android:text="@string/analytic_reports"
+                                        android:textColor="@color/colorPrimaryDark" />
+
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_labpayment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_effect"
+
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/labour_ic_card" />
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="#00FFFFFF"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/labour_management"
+                                        android:textColor="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_purchase"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_effect"
+
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/purchase_ic_card" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="#00FFFFFF"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/purchase"
+                                        android:textColor="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_salereportdashboard"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_effect"
+
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/sale_ic_card" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/sale"
+                                        android:textColor="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+
+                                android:layout_height="130dp"
+                                android:layout_columnWeight="1"
+                                android:layout_margin="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+
+                                    android:background="@drawable/ripple_effect"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="10dp">
+
+                                    <ImageView
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/employee_ic_card" />
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:singleLine="true"
+                                        android:text="@string/employee"
+                                        android:textColor="@color/colorPrimaryDark" />
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+                        </GridLayout>
+                    </LinearLayout>
+                </ScrollView>
+
+
+                <!-- Account summary-->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/backgroundlight"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorAccent"
+            android:elevation="4dp"
+
+            android:padding="5dp"
+            app:cardElevation="4dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_my_profile"
+                     />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:background="#00FFFFFF"
+                        android:text="Profile"
+
+                        android:textColor="@color/white"
+                        android:textSize="11dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_accounts"
+                        android:backgroundTint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Accounts"
+                        android:textColor="@color/white"
+                        android:textSize="11dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_settings"
+                        android:backgroundTint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+
+                        android:background="#00FFFFFF"
+                        android:text="Settings"
+                        android:textColor="@color/white"
+                        android:textSize="11dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_notification_small"
+                                android:backgroundTint="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:background="#00FFFFFF"
+
+                                android:text="Notification"
+                                android:textColor="@color/white"
+                                android:textSize="11dp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/notification_redmark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/ic_new"
+                            android:backgroundTint="@color/colorAccent"
+                            android:padding="3dp"
+                            android:text="new"
+                            android:textColor="#fff"
+                            android:textSize="6dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_more_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_more"
+                        android:backgroundTint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="More"
+                        android:textColor="@color/white"
+                        android:textSize="11dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

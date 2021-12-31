@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "413631422077",
+    "firebase_url": "https://accountwell.firebaseio.com",
+    "project_id": "accountwell",
+    "storage_bucket": "accountwell.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413631422077:android:b2cbc5fb27950917819b14",
+        "android_client_info": {
+          "package_name": "com.bsninfotech.accountwell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413631422077-kk3uo63m5vcpltkersh6gfjvubn81fd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPLJctx8UDL4n6CGLyFHlAuEFvFyr1b2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413631422077-kk3uo63m5vcpltkersh6gfjvubn81fd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
