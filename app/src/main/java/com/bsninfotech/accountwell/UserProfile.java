@@ -56,6 +56,7 @@ public class UserProfile extends AppCompatActivity {
         departmentTxt.setText(applicationController.getDepartmentId());
         lastLoginTxt.setText("Last Login: "+sharedpreferences.getString("lastLogin","").toUpperCase());
         String imagerplace= "http://accountwellwebtest.bsninfotech.org"+applicationController.getuserProfile_logo();
+
         imagerplace=imagerplace.replace("..","");
         image_student_dashboard.setImageURI(Uri.parse(imagerplace));
         Glide.get(getApplicationContext()).clearMemory();

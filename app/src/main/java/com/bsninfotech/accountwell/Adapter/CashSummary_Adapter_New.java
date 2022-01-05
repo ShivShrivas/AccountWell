@@ -1,6 +1,7 @@
 package com.bsninfotech.accountwell.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsninfotech.accountwell.Bank_Summary;
 import com.bsninfotech.accountwell.Helper.CashsummaryHelper;
 import com.bsninfotech.accountwell.R;
 
@@ -37,6 +39,14 @@ public class CashSummary_Adapter_New extends RecyclerView.Adapter<CashSummary_Ad
 
     @Override
     public void onBindViewHolder(@NonNull CashSummary_Adapter_New.CashSummaryViewHolder holder, int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(applicationContext,Bank_Summary.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                applicationContext.startActivity(i);
+            }
+        });
     holder.textViewNation.setText(cashsummaryHelpers.get(position).getNotation());
     holder.textViewName.setText(cashsummaryHelpers.get(position).getName());
         Log.d("TAG", "onBindViewHolder: "+cashsummaryHelpers.get(position).getBalance());

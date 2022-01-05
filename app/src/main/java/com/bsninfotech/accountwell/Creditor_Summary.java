@@ -58,7 +58,7 @@ public class Creditor_Summary extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         TypefaceUtil fontChanger = new TypefaceUtil(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);
         fontChanger.replaceFonts((ConstraintLayout)findViewById(R.id.layout_cashsummarynew));
-        SpannableString str = new SpannableString("Cash Summary");
+        SpannableString str = new SpannableString("Sundry Summary");
         Typeface font2 = Typeface.createFromAsset(getAssets(), "fonts/Nunito-SemiBold.ttf");
         str.setSpan (new CustomTypefaceSpan("",font2), 0, str.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         getSupportActionBar().setTitle(str);

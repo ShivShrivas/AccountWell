@@ -1,6 +1,5 @@
 package com.bsninfotech.accountwell;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -12,10 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -27,11 +24,11 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -46,26 +43,42 @@ import com.bsninfotech.accountwell.Const.Constant;
 import com.bsninfotech.accountwell.Const.NotificationUtils;
 import com.bsninfotech.accountwell.Const.TypefaceUtil;
 import com.bsninfotech.accountwell.Model.ServerApi;
+import com.bsninfotech.accountwell.RetrofitSetup.ApiService;
+import com.bsninfotech.accountwell.RetrofitSetup.RestClient;
 import com.bsninfotech.accountwell.Services.Config;
 import com.bsninfotech.accountwell.Services.JsonParser;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Login_Actitivty extends AppCompatActivity {
     EditText username,password;
     Button login;
-    TextView forgetpassword;
+    Retrofit retrofit=null;
+    TextView forgetpassword,txtCompanyCode,changeCompCode;
     String userid,pasword,school_code,theme_code,schoolcode_code="",sch_code="";
     String userId,loginTypeId,sessionId,fyId,last_login;
     Typeface typeface;
     SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
     ApplicationControllerAdmin applicationController;
-    LinearLayout loginlayout;
+    LinearLayout loginlayout,compCodelayout;
     Context context;
     String regId,InstitutionType,BranchWebsite,AVer;
     CheckBox check_remember;
@@ -90,44 +103,39 @@ public class Login_Actitivty extends AppCompatActivity {
         getSupportActionBar().hide();
         TypefaceUtil fontChanger = new TypefaceUtil(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);
         fontChanger.replaceFonts((LinearLayout) findViewById(R.id.login_layout));
-//
-//       Button button_login=findViewById(R.id.button_login);
-//        button_login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Login_Actitivty.this, Login_Type.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+
         applicationController = (ApplicationControllerAdmin) getApplication();
+
         typeface = Typeface.createFromAsset(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
+        editor=sharedpreferences.edit();
         loginlayout = (LinearLayout) findViewById(R.id.login_layout);
         username = (EditText) findViewById(R.id.username);
         // username.setFilters(new InputFilter[]{new InputFilter.AllCaps(),new InputFilter.LengthFilter(30)});
         password = (EditText) findViewById(R.id.password);
         forgetpassword = (TextView) findViewById(R.id.forgetpassword);
         login = (Button) findViewById(R.id.button_login);
-
+        txtCompanyCode=findViewById(R.id.txtCompanyCode);
+        compCodelayout=findViewById(R.id.compCodeLayout);
+        changeCompCode=findViewById(R.id.changeCompCode);
         check_remember = (CheckBox) findViewById(R.id.check_remember);
         String sch_code = sharedpreferences.getString("sch_code", "");
         String branch_code = sharedpreferences.getString("branch_code", "");
         String school_logo = sharedpreferences.getString("school_logo", "");
-
-        /* if(school_logo != null && !school_logo.isEmpty()){
-             applicationController.setschool_logo(school_logo);
-         }else {
-             applicationController.setschool_logo(school_logo);
-         }*/
-
-        //  applicationController.setschool_logo(school_logo);
+        changeCompCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showdialog();
+            }
+        });
         school_code = sch_code + branch_code;
-        new GetULR().execute();
-        new Getservices().execute();
+        getMainUrl(school_code);
+        txtCompanyCode.setText(school_code);
         if (sch_code.equals("")) {
+            compCodelayout.setVisibility(View.GONE);
             showdialog();
         } else {
+            compCodelayout.setVisibility(View.VISIBLE);
             applicationController.setschoolCode(sch_code);
             applicationController.setBranchcode(branch_code);
         }
@@ -210,7 +218,7 @@ public class Login_Actitivty extends AppCompatActivity {
                     snackbar.setActionTextColor(Color.RED);
                     snackbar.show();
                 } else {
-                    new LoginProcess().execute();
+                    loginProcess();
                 }
             }
         });
@@ -313,6 +321,86 @@ public class Login_Actitivty extends AppCompatActivity {
 
     }
 
+    private void loginProcess() {
+        RestClient restClient=new RestClient();
+        ApiService service=restClient.getApiService();
+        Call<List<JsonObject>> call=service.getLogin(Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()));
+       call.enqueue(new Callback<List<JsonObject>>() {
+           @Override
+           public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+
+
+               if (response!=null && !response.body().get(0).get("userid").toString().equals("null")){
+                   Log.d("TAG", "onResponse:uid "+response.body().get(0).get("userid").toString());
+
+                       Log.d("TAG", "onResponse: "+response.body().get(0).get("userid"));
+                       applicationController.setUserID(response.body().get(0).get("userid").toString());
+                       applicationController.setLoginType(response.body().get(0).get("loginTypeId").toString());
+                       applicationController.setFyID(response.body().get(0).get("financialYear").toString());
+
+                                    editor.putString("lastLogin",response.body().get(0).get("LastLogin").getAsString());
+                                    editor.commit();
+                       startActivity(new Intent(Login_Actitivty.this,Login_Type.class));
+
+                    }else{
+                   Toast.makeText(getApplicationContext(), "Please enter correct credential ", Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+               Toast.makeText(getApplicationContext(), "Please enter School code", Toast.LENGTH_SHORT).show();
+    showdialog();
+           }
+       });
+
+
+    }
+
+    private void getMainUrl(String sch_code) {
+        Log.d("TAG", "getMainUrl:prm "+Paraser(sch_code));
+         retrofit=new Retrofit.Builder()
+              .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://masterservices.bsninfotech.org/ConHandShake.svc/mobile/")
+                .build();
+        ApiService service=retrofit.create(ApiService.class);
+
+      Call<List<JsonObject>> call=service.getMainUrl(Paraser(sch_code));
+     call.enqueue(new Callback<List<JsonObject>>() {
+         @Override
+         public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                if (response!=null){
+                   if (response.body().size()>1){
+
+                       Log.d("TAG", "onResponse:res "+response.body());
+                       applicationController.setServicesapplication(String.valueOf(response.body().get(1).get("SDKUrl").getAsString()));
+
+                       Log.d(TAG, "onResponse: ++ "+ ApplicationControllerAdmin.getServicesapplication());
+                   }else {
+                       Toast.makeText(getApplicationContext(), "Please enter School code", Toast.LENGTH_SHORT).show();
+                       showdialog();
+                   }
+
+                }else {
+                    Toast.makeText(getApplicationContext(), "Somthing went wrong!, Please retry", Toast.LENGTH_SHORT).show();
+                    showdialog();
+                }
+
+         }
+
+         @Override
+         public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+             Toast.makeText(getApplicationContext(), "Somthing went wrong!, Please retry", Toast.LENGTH_SHORT).show();
+             showdialog();
+
+         }
+     });
+
+
+
+    }
+
+
     TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -327,166 +415,166 @@ public class Login_Actitivty extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
         }
     };
-    private class LoginProcess extends AsyncTask<String, String, Integer> {
-        ProgressDialog progressDialog = new ProgressDialog(Login_Actitivty.this);
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(Login_Actitivty.this, "", "Please Wait...", true);
-            super.onPreExecute();
-        }
-        @Override
-        protected Integer doInBackground(String... strings) {
-            int status=0;
-            JsonParser josnparser=new JsonParser(getApplicationContext());
-            Log.d("TAG", "doInBackground: loginProcess :"+applicationController.getServicesapplication()+ServerApi.LOGIN_API+"////"+Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()));
-            String response=josnparser.executePost(applicationController.getServicesapplication()+ServerApi.LOGIN_API,Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()),"1");
-          //  String response=josnparser.executePost(applicationController.getServicesapplication()+ServerApi.LOGIN_API,Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()),"1");
-            String api =applicationController.getServicesapplication()+ServerApi.LOGIN_API;
-            if(response!=null){
-                if (response.length()>5){
-                    try {
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
+//    private class LoginProcess extends AsyncTask<String, String, Integer> {
+//        ProgressDialog progressDialog = new ProgressDialog(Login_Actitivty.this);
+//        @Override
+//        protected void onPreExecute() {
+//            progressDialog = ProgressDialog.show(Login_Actitivty.this, "", "Please Wait...", true);
+//            super.onPreExecute();
+//        }
+//        @Override
+//        protected Integer doInBackground(String... strings) {
+//            int status=0;
+//            JsonParser josnparser=new JsonParser(getApplicationContext());
+//            Log.d("TAG", "doInBackground: loginProcess :"+applicationController.getServicesapplication()+ServerApi.LOGIN_API+"////"+Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()));
+//            String response=josnparser.executePost(applicationController.getServicesapplication()+ServerApi.LOGIN_API,Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()),"1");
+//          //  String response=josnparser.executePost(applicationController.getServicesapplication()+ServerApi.LOGIN_API,Para(userid,pasword,applicationController.getschoolCode()+applicationController.getBranchcode()),"1");
+//            String api =applicationController.getServicesapplication()+ServerApi.LOGIN_API;
+//            if(response!=null){
+//                if (response.length()>5){
+//                    try {
+//                        SharedPreferences.Editor editor = sharedpreferences.edit();
+//
+//                        JSONArray jsonArray= new JSONArray(response);
+//                        JSONObject jsonobject = jsonArray.getJSONObject(0);
+//                        userId=jsonobject.getString("userid");
+//                        applicationController.setUserID(userid);
+//                        fyId=jsonobject.getString("fyId");
+//                       // sessionId=jsonobject.getString("sessionId");
+//                        user_status=jsonobject.getString("Active");
+//                        editor.putString("userid", userId);
+//                        editor.commit();
+//                        if(userId.equalsIgnoreCase("null") || userId.equals("")){
+//                            status=-2;
+//                        }else{
+//                            if(user_status.equals("0")){
+//                                status=-3;
+//                            }else{
+//                                loginTypeId=jsonobject.getString("loginTypeId");
+//                                if(loginTypeId.equals("4") || loginTypeId.equals("2") ){
+//                                   // sessionId=jsonobject.getString("sessionId");
+//                                    last_login=jsonobject.getString("LastLogin");
+//                                    editor.putString("userName",userid);
+//                                    editor.putString("lastLogin",last_login);
+//                                    editor.commit();
+//                                    fyId=jsonobject.getString("fyId");
+//                                    school_logo=jsonobject.getString("BranchLogo");
+//                                    school_name=jsonobject.getString("BranchName");
+//                                    InstitutionType=jsonobject.getString("InstitutionType");
+//                                    status=1;
+//                                }else{
+//                                    status=-4;
+//                                }
+//                            }
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                        status=-1;
+//                    }
+//                }else{
+//                    status=-2;
+//                }
+//            }else{
+//                status=-2;
+//            }
+//
+//            return status;
+//        }
+//        @Override
+//        protected void onPostExecute(Integer s) {
+//            super.onPostExecute(s);
+//            switch (s){
+//                case 1:
+//                    SharedPreferences.Editor editor = sharedpreferences.edit();
+//                    editor.putString("userId", userid);
+//                    editor.putString("Password", pasword);
+//                    editor.putString("loginTypeId", loginTypeId);
+//                    //editor.putString("sessionId", sessionId);
+//                    editor.putString("fyId", fyId);
+//                    editor.putString("school_logo", school_logo);
+//                    editor.commit();
+//                    applicationController.setUserID(userId);
+//                    applicationController.setLoginType(loginTypeId);
+//                   // applicationController.setSeesionID(sessionId);
+//                    applicationController.setFyID(fyId);
+//                    applicationController.setschool_name(school_name);
+//
+//                    applicationController.setschooltype(InstitutionType);
+//
+//                    Intent intent= new Intent(Login_Actitivty.this,Login_Type.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.transition.fadein, R.transition.fadeout);
+//
+//                    finish();
+//                    progressDialog.dismiss();
+//                    break;
+//                case -2:
+//                    progressDialog.dismiss();
+//                    Snackbar snackbar1 = Snackbar
+//                            .make(loginlayout, "User Credentials are not Valid. Please Try Again.", Snackbar.LENGTH_LONG)
+//                            .setAction("RETRY", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
+//                                    snackbar1.show();*/
+//                                }
+//                            });
+//                    snackbar1.setActionTextColor(Color.RED);
+//                    snackbar1.show();
+//                    sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor1 = sharedpreferences.edit();
+//                    editor1.clear();
+//                    editor1.commit();
+//                    break;
+//                case -1:
+//                    progressDialog.dismiss();
+//                    Snackbar snackbar = Snackbar
+//                            .make(loginlayout, "Network Congestion! Please try Again", Snackbar.LENGTH_LONG)
+//                            .setAction("RETRY", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
+//                                    snackbar1.show();*/
+//                                }
+//                            });
+//                    snackbar.setActionTextColor(Color.RED);
+//                    snackbar.show();
+//                    break;
+//                case -3:
+//                    progressDialog.dismiss();
+//                    Snackbar snackbarb = Snackbar
+//                            .make(loginlayout, "Your Id is Inactive. Please Contact to Administrator", Snackbar.LENGTH_LONG)
+//                            .setAction("Done", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
+//                                    snackbar1.show();*/
+//                                }
+//                            });
+//                    snackbarb.setActionTextColor(Color.RED);
+//                    snackbarb.show();
+//                    break;
+//                case -4:
+//                    progressDialog.dismiss();
+//                    errorDialog();
+//                    break;
+//
+//            }
+//        }
+//    }
 
-                        JSONArray jsonArray= new JSONArray(response);
-                        JSONObject jsonobject = jsonArray.getJSONObject(0);
-                        userId=jsonobject.getString("userid");
-                        applicationController.setUserID(userid);
-                        fyId=jsonobject.getString("fyId");
-                       // sessionId=jsonobject.getString("sessionId");
-                        user_status=jsonobject.getString("Active");
-                        editor.putString("userid", userId);
-                        editor.commit();
-                        if(userId.equalsIgnoreCase("null") || userId.equals("")){
-                            status=-2;
-                        }else{
-                            if(user_status.equals("0")){
-                                status=-3;
-                            }else{
-                                loginTypeId=jsonobject.getString("loginTypeId");
-                                if(loginTypeId.equals("4") || loginTypeId.equals("2") ){
-                                   // sessionId=jsonobject.getString("sessionId");
-                                    last_login=jsonobject.getString("LastLogin");
-                                    editor.putString("userName",userid);
-                                    editor.putString("lastLogin",last_login);
-                                    editor.commit();
-                                    fyId=jsonobject.getString("fyId");
-                                    school_logo=jsonobject.getString("BranchLogo");
-                                    school_name=jsonobject.getString("BranchName");
-                                    InstitutionType=jsonobject.getString("InstitutionType");
-                                    status=1;
-                                }else{
-                                    status=-4;
-                                }
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        status=-1;
-                    }
-                }else{
-                    status=-2;
-                }
-            }else{
-                status=-2;
-            }
-
-            return status;
-        }
-        @Override
-        protected void onPostExecute(Integer s) {
-            super.onPostExecute(s);
-            switch (s){
-                case 1:
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putString("userId", userid);
-                    editor.putString("Password", pasword);
-                    editor.putString("loginTypeId", loginTypeId);
-                    //editor.putString("sessionId", sessionId);
-                    editor.putString("fyId", fyId);
-                    editor.putString("school_logo", school_logo);
-                    editor.commit();
-                    applicationController.setUserID(userId);
-                    applicationController.setLoginType(loginTypeId);
-                   // applicationController.setSeesionID(sessionId);
-                    applicationController.setFyID(fyId);
-                    applicationController.setschool_name(school_name);
-
-                    applicationController.setschooltype(InstitutionType);
-
-                    Intent intent= new Intent(Login_Actitivty.this,Login_Type.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.transition.fadein, R.transition.fadeout);
-
-                    finish();
-                    progressDialog.dismiss();
-                    break;
-                case -2:
-                    progressDialog.dismiss();
-                    Snackbar snackbar1 = Snackbar
-                            .make(loginlayout, "User Credentials are not Valid. Please Try Again.", Snackbar.LENGTH_LONG)
-                            .setAction("RETRY", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
-                                    snackbar1.show();*/
-                                }
-                            });
-                    snackbar1.setActionTextColor(Color.RED);
-                    snackbar1.show();
-                    sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor1 = sharedpreferences.edit();
-                    editor1.clear();
-                    editor1.commit();
-                    break;
-                case -1:
-                    progressDialog.dismiss();
-                    Snackbar snackbar = Snackbar
-                            .make(loginlayout, "Network Congestion! Please try Again", Snackbar.LENGTH_LONG)
-                            .setAction("RETRY", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
-                                    snackbar1.show();*/
-                                }
-                            });
-                    snackbar.setActionTextColor(Color.RED);
-                    snackbar.show();
-                    break;
-                case -3:
-                    progressDialog.dismiss();
-                    Snackbar snackbarb = Snackbar
-                            .make(loginlayout, "Your Id is Inactive. Please Contact to Administrator", Snackbar.LENGTH_LONG)
-                            .setAction("Done", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                   /* Snackbar snackbar1 = Snackbar.make(loginlayout, "Message is restored!", Snackbar.LENGTH_SHORT);
-                                    snackbar1.show();*/
-                                }
-                            });
-                    snackbarb.setActionTextColor(Color.RED);
-                    snackbarb.show();
-                    break;
-                case -4:
-                    progressDialog.dismiss();
-                    errorDialog();
-                    break;
-
-            }
-        }
-    }
-
-    public String Para(String userid,String pasword,String school_code){
-        JSONObject jsonParam = new JSONObject();
+    public JsonObject Para(String userid,String pasword,String school_code){
+        JsonObject jsonParam = new JsonObject();
         try {
-            jsonParam.put("username", userid);
-            jsonParam.put("password", pasword);
-            jsonParam.put("bid", school_code);
-            jsonParam.put("AccessMode", "M");
-            jsonParam.put("GSMID", regId);
-        } catch (JSONException e) {
+            jsonParam.addProperty("username", userid);
+            jsonParam.addProperty("password", pasword);
+            jsonParam.addProperty("bid", school_code);
+            jsonParam.addProperty("AccessMode", "M");
+            jsonParam.addProperty("GSMID", regId);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return jsonParam.toString();
+        return jsonParam;
     }
 
     private void showdialog() {
@@ -509,8 +597,7 @@ public class Login_Actitivty extends AppCompatActivity {
             public void onClick(View v) {
                 school_code=text_schoolcode.getText().toString().trim();
                 if(school_code.equals("")){
-                    Snackbar.make(v, "Enter Company Code", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Snackbar.make(v, "Enter Company Code", Snackbar.LENGTH_LONG).show();
                 }else if(school_code.length()==4){
                     sch_code=school_code.substring(0,2);
                     String branch_code=school_code.substring(2,4);
@@ -518,10 +605,12 @@ public class Login_Actitivty extends AppCompatActivity {
                     editor.putString("sch_code", sch_code);
                     editor.putString("branch_code", branch_code);
                     editor.commit();
+
                     applicationController.setschoolCode(sch_code);
                     applicationController.setBranchcode(branch_code);
-                    new GetULR().execute();
-                    new Getservices().execute();
+//                    new GetULR().execute();
+                    getMainUrl(school_code);
+//                    new Getservices().execute();
                     dialog.dismiss();
                 }else if(school_code.length()==6){
                     sch_code=school_code.substring(0,4);
@@ -530,14 +619,16 @@ public class Login_Actitivty extends AppCompatActivity {
                     editor.putString("sch_code", sch_code);
                     editor.putString("branch_code", branch_code);
                     editor.commit();
+                    txtCompanyCode.setText(school_code);
+                    compCodelayout.setVisibility(View.VISIBLE);
                     applicationController.setschoolCode(sch_code);
                     applicationController.setBranchcode(branch_code);
-                     new GetULR().execute();
-                     new Getservices().execute();
+                     //new GetULR().execute();
+                     getMainUrl(school_code);
+                    // new Getservices().execute();
                     dialog.dismiss();
                 }else{
-                    Snackbar.make(v, "Enter Correct Company Code", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Snackbar.make(v, "Enter Correct Company Code", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -691,69 +782,69 @@ public class Login_Actitivty extends AppCompatActivity {
     }
 
 
-    private class Getservices extends AsyncTask<String, String, Integer> {
-        ProgressDialog progressDialog = new ProgressDialog(Login_Actitivty.this);
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(Login_Actitivty.this, "", "Please Wait...", true);
-            super.onPreExecute();
-        }
-        @Override
-        protected Integer doInBackground(String... strings) {
-        int status=0;
-            JsonParser josnparser=new JsonParser(getApplicationContext());
-            Log.d("TAG", "doInBackground: GetService"+ServerApi.API_SERV+"///"+Paraser(school_code));
-            String response=josnparser.executePost(ServerApi.API_SERV,Paraser(school_code),"1");
-            if(response!=null){
-                if (response.length()>5){
-                    try {
-                        JSONArray jsonArray= new JSONArray(response);
-                        JSONObject jsonobject = jsonArray.getJSONObject(1);
-                        Log.d("TAG", "BranchWebsiteservices :"+jsonobject.getString(ServerApi.API_SDKUrl));
-                        BranchWebsiteservices=jsonobject.getString(ServerApi.API_SDKUrl);
-                        status=1;
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        status=-1;
-                    }
-                }else{
-                    status=-1;
-                }
-            }else{
-                status=-1;
-            }
-            return status;
-        }
-
-        @Override
-        protected void onPostExecute(Integer s) {
-            super.onPostExecute(s);
-            progressDialog.dismiss();
-            switch (s){
-                case 1:
-                    applicationController.setServicesapplication("http://"+BranchWebsiteservices);
-                    new GetULR().execute();
-
-                    break;
-                case -2:
-
-                    break;
-                case -1:
-                    //  Toast.makeText(getApplicationContext(),"Network Congestion! Please try Again",Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
-    }
-    public String Paraser(String school_code){
-        JSONObject jsonParam1 = new JSONObject();
-        JSONObject jsonParam = new JSONObject();
+//    private class Getservices extends AsyncTask<String, String, Integer> {
+//        ProgressDialog progressDialog = new ProgressDialog(Login_Actitivty.this);
+//        @Override
+//        protected void onPreExecute() {
+//            progressDialog = ProgressDialog.show(Login_Actitivty.this, "", "Please Wait...", true);
+//            super.onPreExecute();
+//        }
+//        @Override
+//        protected Integer doInBackground(String... strings) {
+//        int status=0;
+//            JsonParser josnparser=new JsonParser(getApplicationContext());
+//            Log.d("TAG", "doInBackground: GetService"+ServerApi.API_SERV+"///"+Paraser(school_code));
+//            String response=josnparser.executePost(ServerApi.API_SERV,Paraser(school_code),"1");
+//            if(response!=null){
+//                if (response.length()>5){
+//                    try {
+//                        JSONArray jsonArray= new JSONArray(response);
+//                        JSONObject jsonobject = jsonArray.getJSONObject(1);
+//                        Log.d("TAG", "BranchWebsiteservices :"+jsonobject.getString(ServerApi.API_SDKUrl));
+//                        BranchWebsiteservices=jsonobject.getString(ServerApi.API_SDKUrl);
+//                        status=1;
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                        status=-1;
+//                    }
+//                }else{
+//                    status=-1;
+//                }
+//            }else{
+//                status=-1;
+//            }
+//            return status;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Integer s) {
+//            super.onPostExecute(s);
+//            progressDialog.dismiss();
+//            switch (s){
+//                case 1:
+//                    applicationController.setServicesapplication("http://"+BranchWebsiteservices);
+//                    new GetULR().execute();
+//
+//                    break;
+//                case -2:
+//
+//                    break;
+//                case -1:
+//                    //  Toast.makeText(getApplicationContext(),"Network Congestion! Please try Again",Toast.LENGTH_LONG).show();
+//                    break;
+//            }
+//        }
+//    }
+    public JsonObject Paraser(String school_code){
+        JsonObject jsonParam1 = new JsonObject();
+        JsonObject jsonParam = new JsonObject();
         try {
-            jsonParam.put(ServerApi.API_CONURL, school_code);
-            jsonParam1.put("obj", jsonParam);
-        } catch (JSONException e) {
+            jsonParam.addProperty(ServerApi.API_CONURL, school_code);
+            jsonParam1.add("obj", jsonParam);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return jsonParam1.toString();
+        return jsonParam1;
     }
 
 

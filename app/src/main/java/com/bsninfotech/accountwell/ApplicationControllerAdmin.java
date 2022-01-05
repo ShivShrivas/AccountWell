@@ -20,6 +20,16 @@ public class ApplicationControllerAdmin extends Application {
     private String branchcode;
     private String branchName;
 
+    public String getFyIdCode() {
+        return FyIdCode;
+    }
+
+    public void setFyIdCode(String fyIdCode) {
+        FyIdCode = fyIdCode;
+    }
+
+
+    private String FyIdCode;
     private String active_code;
 
     private String date;
@@ -58,7 +68,7 @@ public class ApplicationControllerAdmin extends Application {
     private String DepartmentId;
     private String Leaveapplication;
     private String LiveClass;
-    private String Servicesapplication;
+    private static String Servicesapplication;
     private String userMail;
     private  String address;
     private String Comp_code;
@@ -127,8 +137,8 @@ public class ApplicationControllerAdmin extends Application {
     public void setServicesapplication(String Servicesapplication) {
         this.Servicesapplication = Servicesapplication;
     }
-    public String getServicesapplication() {
-        return Servicesapplication;
+    public static String getServicesapplication() {
+        return "accountwelltestmobile.bsninfotech.org";
     }
 
 

@@ -16,15 +16,16 @@ import com.bsninfotech.accountwell.Helper.FYID_Helper;
 import com.bsninfotech.accountwell.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CompanyNameList_Adapter extends ArrayAdapter<String> {
     private Context applicationContext;
     private  int spinner_class_item;
-    private ArrayList selectCompany;
+    private List selectCompany;
     private Resources res;
     LayoutInflater inflater;
     Company_Helper tempValues=null;
-    public CompanyNameList_Adapter(Context applicationContext, int spinner_class_item, ArrayList selectCompany, Resources res) {
+    public CompanyNameList_Adapter(Context applicationContext, int spinner_class_item, List selectCompany, Resources res) {
         super(applicationContext,spinner_class_item,selectCompany);
         this.applicationContext=applicationContext;
         this.res=res;

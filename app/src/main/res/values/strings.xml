@@ -6,7 +6,7 @@
     <string name="time_out">TIME OUT</string>
     <string name="ledger"><u>Stock Ledger</u></string>
     <string name="login_here">Login here!</string>
-    <string name="user_name">User Name</string>
+
     <string name="passwor_hiding">*****</string>
     <string name="remember_me">Remember Me</string>
     <string name="show_password">Show password</string>
@@ -41,4 +41,24 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="user_name">User Name</string>
+    <string name="designation_admin">Designation: Admin</string>
+    <string name="setting">setting</string>
+    <string name="logout">Logout</string>
+    <string name="account_info">Account Info</string>
+    <string name="company1">Company:</string>
+    <string name="site1">Site:</string>
+    <string name="head_office">Head Office</string>
+    <string name="financial_year1">Financial Year:</string>
+    <string name="_2020_21">2020-21</string>
+    <string name="last_time_login">Last Time Login:</string>
+
+    <string name="address">Address:</string>
+    <string name="_25_dec_2021_05_34_pm">25-Dec-2021 05:34 PM</string>
+    <string name="department">Department:</string>
+
+    <string name="for_technical_support">For technical support</string>
+    <string name="call_us">Call us:</string>
+    <string name="email_us">Email us:</string>
 </resources>

@@ -15,16 +15,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.bsninfotech.accountwell.Adapter.AccountSummaryAdapter;
 import com.bsninfotech.accountwell.Adapter.CashSummary_Adapter_New;
+import com.bsninfotech.accountwell.Helper.Accounts_Helper;
 import com.bsninfotech.accountwell.Helper.CashsummaryHelper;
 import com.bsninfotech.accountwell.Model.ServerApi;
+import com.bsninfotech.accountwell.RetrofitSetup.ApiService;
+import com.bsninfotech.accountwell.RetrofitSetup.RestClient;
 import com.bsninfotech.accountwell.Services.JsonParser;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,7 +56,9 @@ public class Debit_Frag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    List<Accounts_Helper> accounts_helpers=new ArrayList<>();
+    List<Accounts_Helper> customers=new ArrayList<>();
+    AccountSummaryAdapter adapter;
     public Debit_Frag() {
         // Required empty public constructor
     }
@@ -103,12 +115,58 @@ public class Debit_Frag extends Fragment {
 
             }
         });
-        new getDebitor_Summary().execute();
+        getCreditor_Summary();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
     }
 
+    private void getCreditor_Summary() {
+        RestClient restClient=new RestClient();
+        ApiService service=restClient.getApiService();
+        Call<List<Accounts_Helper>> accounts_helper=service.getAccountsList(paraAccounts("12",applicationControllerAdmin.getComp_code(),applicationControllerAdmin.getBranchcode(),applicationControllerAdmin.getschoolCode(),applicationControllerAdmin.getSite_Code(),applicationControllerAdmin.getFyIdCode()));
+        accounts_helper.enqueue(new Callback<List<Accounts_Helper>>() {
+            @Override
+            public void onResponse(Call<List<Accounts_Helper>> call, Response<List<Accounts_Helper>> response) {
+                Log.d("TAG", "onResponse:response "+response.body());
+                accounts_helpers=response.body();
+                for (int i=0;i<accounts_helpers.size();i++){
+                    String fullname=accounts_helpers.get(i).getName();
+                    String[] name=fullname.split("-");
+                    Log.d("TAG", "onResponse: "+name[0]);
+                    if (name[0].equals("Supplier")){
+                        Accounts_Helper accounts_helper1=new Accounts_Helper();
+                        accounts_helper1.setName(accounts_helpers.get(i).getName());
+                        accounts_helper1.setSubCode(accounts_helpers.get(i).getSubCode());
+                        customers.add(accounts_helper1);
+                    }
+                }
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapter=new AccountSummaryAdapter(getContext(),R.layout.account_item_card,customers);
+                recyclerView.setAdapter(adapter);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Accounts_Helper>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private JsonObject paraAccounts(String i, String getschoolCode, String branchcode, String comp_code, String site_code, String fyID) {
+
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",i);
+        jsonObject.addProperty("SchoolCode",getschoolCode);
+        jsonObject.addProperty("BranchCode",branchcode);
+        jsonObject.addProperty("CompCode",comp_code);
+        jsonObject.addProperty("SiteCode",site_code);
+        jsonObject.addProperty("FYId",fyID);
+
+        return jsonObject;
+    }
     private void filter(String text) {
         ArrayList<CashsummaryHelper> filteredList = new ArrayList<>();
 
@@ -121,72 +179,72 @@ public class Debit_Frag extends Fragment {
         cashSummary_adapter.filterList(filteredList);
     }
 
-    private class getDebitor_Summary extends AsyncTask<String, String, Integer> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            switch (integer) {
-                case 1:
-                     cashSummary_adapter = new CashSummary_Adapter_New(getContext(), R.layout.item_vash_summary_new, cashsummaryHelpers);
-                    recyclerView.setAdapter(cashSummary_adapter);
-
-
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected Integer doInBackground(String... strings) {
-            int status = 0;
-            JsonParser jsonParser = new JsonParser(getContext());
-            Log.d("TAG", "doInBackground:cahs summary  " + applicationControllerAdmin.getServicesapplication() + ServerApi.GET_DEBITORSUMMARY + "///" + paraCreditorSummary("2", applicationControllerAdmin.getComp_code(), applicationControllerAdmin.getBranchcode(), applicationControllerAdmin.getschoolCode(), applicationControllerAdmin.getSite_Code(), "1"));
-            String response = jsonParser.executePost(applicationControllerAdmin.getServicesapplication() + ServerApi.GET_DEBITORSUMMARY, paraCreditorSummary("2", applicationControllerAdmin.getComp_code(), applicationControllerAdmin.getBranchcode(), applicationControllerAdmin.getschoolCode(), applicationControllerAdmin.getSite_Code(), "1"), "1");
-            Log.d("TAG", "doInBackground: " + response);
-            if (response != null) {
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    cashsummaryHelpers = new ArrayList<>();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        CashsummaryHelper summary = new CashsummaryHelper();
-                        summary.setBalance(jsonObject.getDouble("Balance"));
-                        summary.setName(jsonObject.getString("Name"));
-                        summary.setNotation(jsonObject.getString("Notation"));
-
-                        cashsummaryHelpers.add(summary);
-
-                        status = 1;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return status;
-        }
-
-        private String paraCreditorSummary(String s, String comp_code, String branchcode, String getschoolCode, String site_code, String s1) {
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("Action", s);
-                jsonObject.put("SchoolCode", comp_code);
-                jsonObject.put("BranchCode", branchcode);
-                jsonObject.put("CompCode", getschoolCode);
-                jsonObject.put("SiteCode", site_code);
-                jsonObject.put("FYId", s1);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return jsonObject.toString();
-        }
-    }
+//    private class getDebitor_Summary extends AsyncTask<String, String, Integer> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Integer integer) {
+//            super.onPostExecute(integer);
+//            switch (integer) {
+//                case 1:
+//                     cashSummary_adapter = new CashSummary_Adapter_New(getContext(), R.layout.item_vash_summary_new, cashsummaryHelpers);
+//                    recyclerView.setAdapter(cashSummary_adapter);
+//
+//
+//            }
+//        }
+//
+//        @Override
+//        protected void onProgressUpdate(String... values) {
+//            super.onProgressUpdate(values);
+//        }
+//
+//        @Override
+//        protected Integer doInBackground(String... strings) {
+//            int status = 0;
+//            JsonParser jsonParser = new JsonParser(getContext());
+//            Log.d("TAG", "doInBackground:cahs summary  " + applicationControllerAdmin.getServicesapplication() + ServerApi.GET_DEBITORSUMMARY + "///" + paraCreditorSummary("2", applicationControllerAdmin.getComp_code(), applicationControllerAdmin.getBranchcode(), applicationControllerAdmin.getschoolCode(), applicationControllerAdmin.getSite_Code(), "1"));
+//            String response = jsonParser.executePost(applicationControllerAdmin.getServicesapplication() + ServerApi.GET_DEBITORSUMMARY, paraCreditorSummary("2", applicationControllerAdmin.getComp_code(), applicationControllerAdmin.getBranchcode(), applicationControllerAdmin.getschoolCode(), applicationControllerAdmin.getSite_Code(), "1"), "1");
+//            Log.d("TAG", "doInBackground: " + response);
+//            if (response != null) {
+//                try {
+//                    JSONArray jsonArray = new JSONArray(response);
+//                    cashsummaryHelpers = new ArrayList<>();
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                        CashsummaryHelper summary = new CashsummaryHelper();
+//                        summary.setBalance(jsonObject.getDouble("Balance"));
+//                        summary.setName(jsonObject.getString("Name"));
+//                        summary.setNotation(jsonObject.getString("Notation"));
+//
+//                        cashsummaryHelpers.add(summary);
+//
+//                        status = 1;
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            return status;
+//        }
+//
+//        private String paraCreditorSummary(String s, String comp_code, String branchcode, String getschoolCode, String site_code, String s1) {
+//            JSONObject jsonObject = new JSONObject();
+//            try {
+//                jsonObject.put("Action", s);
+//                jsonObject.put("SchoolCode", comp_code);
+//                jsonObject.put("BranchCode", branchcode);
+//                jsonObject.put("CompCode", getschoolCode);
+//                jsonObject.put("SiteCode", site_code);
+//                jsonObject.put("FYId", s1);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            return jsonObject.toString();
+//        }
+//    }
 }

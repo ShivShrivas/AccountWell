@@ -21,46 +21,16 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
-      <LinearLayout
-          android:id="@+id/linearLayout5"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="3dp"
-          android:background="@color/gray"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/searchViewCredit">
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="20dp"
-              android:layout_weight="1"
-              android:text="Party"
-              android:textColor="@color/black"
-              android:textSize="17dp"
-              android:textStyle="bold" />
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="20dp"
-              android:layout_weight="1"
-              android:text="Balance"
-              android:textAlignment="textEnd"
-              android:textColor="@color/black"
-              android:textSize="17dp"
-              android:textStyle="bold" />
-      </LinearLayout>
 
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/recViewCredit"
           android:layout_width="match_parent"
           android:layout_height="0dp"
+          android:layout_marginTop="3dp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+          app:layout_constraintTop_toBottomOf="@+id/searchViewCredit" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

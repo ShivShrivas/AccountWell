@@ -16,15 +16,16 @@ import com.bsninfotech.accountwell.Helper.Site_Helper;
 import com.bsninfotech.accountwell.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SiteNameList_Adapter extends ArrayAdapter<String> {
 private Context applicationContext;
 private  int spinner_class_item;
-private ArrayList selectSite;
+private List selectSite;
 private Resources res;
         LayoutInflater inflater;
         Site_Helper tempValues=null;
-public SiteNameList_Adapter(Context applicationContext, int spinner_class_item, ArrayList selectSite, Resources res) {
+public SiteNameList_Adapter(Context applicationContext, int spinner_class_item, List selectSite, Resources res) {
         super(applicationContext,spinner_class_item,selectSite);
         this.applicationContext=applicationContext;
         this.res=res;

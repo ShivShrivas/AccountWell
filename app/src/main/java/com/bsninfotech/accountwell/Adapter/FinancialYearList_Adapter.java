@@ -16,15 +16,16 @@ import com.bsninfotech.accountwell.Helper.FYID_Helper;
 import com.bsninfotech.accountwell.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FinancialYearList_Adapter extends ArrayAdapter<String> {
     private Context applicationContext;
     private int spinner_class_item;
-    private ArrayList selectFY;
+    private List selectFY;
     private Resources res;
     LayoutInflater inflater;
     FYID_Helper tempValues=null;
-    public FinancialYearList_Adapter(Context applicationContext, int spinner_class_item, ArrayList selectFY, Resources res) {
+    public FinancialYearList_Adapter(Context applicationContext, int spinner_class_item, List selectFY, Resources res) {
         super(applicationContext,spinner_class_item,selectFY);
         this.applicationContext=applicationContext;
         this.res=res;

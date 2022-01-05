@@ -139,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
         layout_cashsummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CashSummary.class);
+                Intent intent = new Intent(MainActivity.this, AccountSummary.class);
+                intent.putExtra("action","10");
+                intent.putExtra("name","Account Summary");
                 startActivity(intent);
             }
         });
@@ -155,7 +157,10 @@ public class MainActivity extends AppCompatActivity {
         layout_banksummar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Bank_Summary.class);
+                Intent intent = new Intent(MainActivity.this, AccountSummary.class);
+                intent.putExtra("action","11");
+                intent.putExtra("name","Bank Summary");
+
                 startActivity(intent);
             }
         });

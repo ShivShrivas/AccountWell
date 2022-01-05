@@ -162,11 +162,11 @@
                     android:id="@+id/image_student_dashboard"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-
+                    android:padding="3dp"
+                    android:background="@drawable/circle_background"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
- />
+                    android:layout_marginEnd="10dp" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -253,7 +253,7 @@
                                             android:layout_weight="3"
                                             android:backgroundTintMode="multiply"
                                             android:backgroundTint="@color/colorPrimaryDark"
-                                            android:src="@drawable/cash_ic"
+                                            android:src="@drawable/cash_summary_ic_new"
                                             />
                                         <ImageView
                                             android:layout_width="wrap_content"
@@ -310,7 +310,7 @@
                                             android:layout_width="50dp"
                                             android:layout_height="50dp"
                                             android:layout_weight="3"
-                                            android:src="@drawable/ic_bank_svg" />
+                                            android:src="@drawable/bank_summary_ic_new" />
 
                                         <ImageView
                                             android:layout_width="wrap_content"
@@ -370,7 +370,7 @@
                                             android:layout_width="45dp"
                                             android:layout_height="45dp"
                                             android:layout_weight="3"
-                                            android:src="@drawable/stock_ic"
+                                            android:src="@drawable/stock_ic_new"
 
                                             />
 
@@ -432,7 +432,7 @@
                                             android:layout_weight="3"
                                             android:backgroundTintMode="multiply"
                                             android:backgroundTint="@color/colorPrimaryDark"
-                                            android:src="@drawable/ic_creditor_svg"
+                                            android:src="@drawable/sundry_ic_new"
                                             />
 
                                         <ImageView
@@ -492,7 +492,7 @@
                                             android:layout_weight="3"
                                             android:backgroundTintMode="multiply"
                                             android:backgroundTint="@color/colorPrimaryDark"
-                                            android:src="@drawable/turnover_ic"
+                                            android:src="@drawable/transaction_ic_new"
                                             />
 
                                         <ImageView
