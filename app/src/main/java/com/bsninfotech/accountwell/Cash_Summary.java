@@ -238,4 +238,6 @@ public class Cash_Summary extends AppCompatActivity implements  SearchView.OnQue
         adapter.filter(text);
         return false;
     }
+
+
 }

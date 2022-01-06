@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:id="@+id/layout_cashsummary"
-    tools:context=".Cash_Summary">
+    tools:context=".LedgerActivity">
     <LinearLayout
         android:background="@color/backgroundlight"
         android:orientation="horizontal"
@@ -251,7 +251,18 @@
                     android:elevation="6dp"
                     android:layout_height="2dp"
                     android:background="@color/colorPrimaryDark" />
+                <CheckBox
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/checkBoxLedger_Narration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:checked="true"
+                    android:text="Show Narrations"
+                    android:onClick="narrationStatus"
 
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textAlignment="textEnd"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -263,11 +274,17 @@
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
+            <EditText
+                android:id="@+id/searchViewLedger"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+               android:padding="5dp"
+                android:hint="Search Here..."
+
+                android:background="@drawable/bg_edit_rec"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
         <LinearLayout
             android:padding="5dp"
@@ -281,6 +298,7 @@
                 android:visibility="gone"
                 android:layout_marginTop="100dp"
                 android:layout_width="300dp"
+
                 android:layout_height="300dp"
                 android:src="@drawable/ic_nodatafound_svg"/>
             <androidx.recyclerview.widget.RecyclerView

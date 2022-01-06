@@ -5,19 +5,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bsninfotech.accountwell.Adapter.LedgerAdapter;
 import com.bsninfotech.accountwell.Helper.Ledger_Helper;
+import com.bsninfotech.accountwell.Helper.Stock_Helper;
 import com.bsninfotech.accountwell.RetrofitSetup.ApiService;
 import com.bsninfotech.accountwell.RetrofitSetup.RestClient;
 import com.google.gson.JsonObject;
@@ -45,22 +49,41 @@ public class LedgerActivity extends AppCompatActivity {
     TextView closingBalanceTxt,openBalanceTxt;
     String subcode,name;
     LedgerAdapter adapter;
+    CheckBox checkBoxLedger_Narration;
+    public static ProgressDialog mProgressDialog;
     ImageView nodatafound;
     List<Ledger_Helper> ledger_helpers=new ArrayList<>();
     RecyclerView recyclerView;
+    EditText searchViewLedger;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledger);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         applicationControllerAdmin= (ApplicationControllerAdmin) getApplication();
         fromDateCalender=findViewById(R.id.formDateCalLedger);
         fromDateTxt=findViewById(R.id.fromDateTxtledger);
         toDateCalender=findViewById(R.id.toDateCalLedger);
         ToDateTxt=findViewById(R.id.toDateTxtledger);
+        searchViewLedger=findViewById(R.id.searchViewLedger);
         recyclerView=findViewById(R.id.RecView_cashsummary);
+        checkBoxLedger_Narration=findViewById(R.id.checkBoxLedger_Narration);
         openBalanceTxt=findViewById(R.id.openBalanceTxt);
         nodatafound=findViewById(R.id.nodatafound);
         closingBalanceTxt=findViewById(R.id.closingBalanceTxt);
+        mProgressDialog = new ProgressDialog(LedgerActivity.this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+        mProgressDialog.setContentView(R.layout.progress_dialoge);
+        mProgressDialog.getWindow().setBackgroundDrawableResource(
+                android.R.color.transparent);
         getFromDate();
         getTodate();
         Intent i=getIntent();
@@ -68,7 +91,22 @@ public class LedgerActivity extends AppCompatActivity {
         name=i.getStringExtra("Name");
         getSupportActionBar().setTitle(name);
         Log.d("TAG", "onCreate: "+subcode);
+        searchViewLedger.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString().trim());
+            }
+        });
         fromDateCalender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +218,7 @@ public class LedgerActivity extends AppCompatActivity {
     private void getLedgerData(String subcode, String todayDate, String fromdate, String comp_code, String getschoolCode, String site_code, String branchcode, String fyIdCode) {
         RestClient restClient=new RestClient();
         ApiService service=restClient.getApiService();
-        Log.d("TAG", "getLedgerData: "+paraLedger("9",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
+        Log.d("TAG", "getLedgerData: "+paraLedger("09",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         Call<List<Ledger_Helper>> call=service.getLedgerData(paraLedger("9",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         call.enqueue(new Callback<List<Ledger_Helper>>() {
             @Override
@@ -193,11 +231,14 @@ public class LedgerActivity extends AppCompatActivity {
                 if (ledger_helpers.size()==2){
                     nodatafound.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
+                    LedgerActivity.mProgressDialog.dismiss();
                 }else {
                     nodatafound.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    recyclerView.setAdapter(new LedgerAdapter(getApplicationContext(),R.layout.ledger_item_card,ledger_helpers));
+                    adapter=new LedgerAdapter(getApplicationContext(),R.layout.ledger_item_card,ledger_helpers,0);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
 
             }
@@ -236,13 +277,34 @@ public class LedgerActivity extends AppCompatActivity {
     }
 
     private void getFromDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
-        Date date = calendar.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MMM-dd");
-        fromDateTxt.setText(format.format(date));
-        fromdate=(format1.format(date));
+
+        fromDateTxt.setText("01-04-2020");
+        fromdate=("2020-Apr-01");
+
+    }
+
+    public void narrationStatus(View view) {
+        if (checkBoxLedger_Narration.isChecked()){
+            adapter=new LedgerAdapter(getApplicationContext(),R.layout.ledger_item_card,ledger_helpers,0);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }else {
+            adapter=new LedgerAdapter(getApplicationContext(),R.layout.ledger_item_card,ledger_helpers,1);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+    private void filter(String text) {
+        ArrayList<Ledger_Helper> filteredList = new ArrayList<>();
+
+
+                for (Ledger_Helper item : ledger_helpers) {
+                    if ( item.getName().contains(text)) {
+                        filteredList.add(item);
+                    }
+        } adapter.notifyDataSetChanged();
+        adapter.filterList(filteredList);
 
     }
 }

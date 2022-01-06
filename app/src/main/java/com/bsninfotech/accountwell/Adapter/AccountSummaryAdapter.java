@@ -3,6 +3,7 @@ package com.bsninfotech.accountwell.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,15 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
               applicationContext.startActivity(i);
           }
       });
-        holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
+      if (position%2==0){
+          holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
+
+      }else {
+          holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
+            holder.cardLayout.setBackgroundColor(Color.rgb(234, 234, 234));
+      }
+
+        AccountSummary.mProgressDialog.dismiss();
     }
 
 

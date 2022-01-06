@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class AccountSummary extends AppCompatActivity {
     RecyclerView AccountSummaryRecView;
     AccountSummaryAdapter adapter;
     String action,activityName;
+    public static ProgressDialog mProgressDialog;
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -48,6 +51,12 @@ public class AccountSummary extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
+        mProgressDialog = new ProgressDialog(AccountSummary.this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+        mProgressDialog.setContentView(R.layout.progress_dialoge);
+        mProgressDialog.getWindow().setBackgroundDrawableResource(
+                android.R.color.transparent);
         action=i.getStringExtra("action");
         activityName=i.getStringExtra("name");
         TypefaceUtil fontChanger = new TypefaceUtil(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);
