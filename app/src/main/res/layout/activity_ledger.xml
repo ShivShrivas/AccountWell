@@ -251,18 +251,39 @@
                     android:elevation="6dp"
                     android:layout_height="2dp"
                     android:background="@color/colorPrimaryDark" />
-                <CheckBox
-                    android:layout_marginEnd="4dp"
-                    android:id="@+id/checkBoxLedger_Narration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:checked="true"
-                    android:text="Show Narrations"
-                    android:onClick="narrationStatus"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textAlignment="textEnd"/>
+                    <Button
+                        android:id="@+id/shareAsPdf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:text="share "
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxLedger_Narration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:checked="true"
+                        android:onClick="narrationStatus"
+                        android:text="Show Narrations"
+
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -307,6 +328,8 @@
                 android:layout_height="match_parent"
                 android:scrollbars="none" />
         </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

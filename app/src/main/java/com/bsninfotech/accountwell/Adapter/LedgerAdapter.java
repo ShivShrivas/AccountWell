@@ -53,7 +53,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
     @Override
     public void onBindViewHolder(@NonNull LedgerViewHolder holder, int position) {
-            if(position==0 || position==ledger_helpers.size()-1){
+            if(ledger_helpers.get(position).getName().equals(" Opening Balance") || ledger_helpers.get(position).getName().equals("Closing Balance") ){
 
                 holder.itemView.setBackgroundColor(Color.rgb(234, 234, 234));
                 String fullName = ledger_helpers.get(position).getName();
@@ -144,6 +144,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
         LedgerActivity.mProgressDialog.dismiss();
     }
+
 
     @Override
     public int getItemCount() {
