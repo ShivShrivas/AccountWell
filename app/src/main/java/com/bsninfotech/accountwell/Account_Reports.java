@@ -1,5 +1,6 @@
 package com.bsninfotech.accountwell;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -104,7 +105,7 @@ public class Account_Reports extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // handle arrow click here
         switch (item.getItemId()) {
             case android.R.id.home:

@@ -6,9 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +24,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +34,18 @@ import com.bsninfotech.accountwell.Helper.Ledger_Helper;
 import com.bsninfotech.accountwell.Helper.Stock_Helper;
 import com.bsninfotech.accountwell.RetrofitSetup.ApiService;
 import com.bsninfotech.accountwell.RetrofitSetup.RestClient;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
@@ -39,10 +53,12 @@ import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +82,7 @@ public class LedgerActivity extends AppCompatActivity {
     TextView closingBalanceTxt,openBalanceTxt;
     String subcode,name;
     LedgerAdapter adapter;
+    ProgressDialog progressBar;
     Button shareAsPdf;
     List listName=new ArrayList();
     List listBalance= new ArrayList();
@@ -76,8 +93,9 @@ public class LedgerActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     EditText searchViewLedger;
     ProgressDialog progressDialog;
+    ProgressBar pdfExportProgressBar;
     private boolean narrationStatus=true;
-
+    LinearLayout layout_ledegr;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -90,9 +108,13 @@ public class LedgerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ledger);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         shareAsPdf=findViewById(R.id.shareAsPdf);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         applicationControllerAdmin= (ApplicationControllerAdmin) getApplication();
         fromDateCalender=findViewById(R.id.formDateCalLedger);
         fromDateTxt=findViewById(R.id.fromDateTxtledger);
+        pdfExportProgressBar=findViewById(R.id.pdfExportProgressBar);
         progressDialog = new ProgressDialog(LedgerActivity.this);
         toDateCalender=findViewById(R.id.toDateCalLedger);
         ToDateTxt=findViewById(R.id.toDateTxtledger);
@@ -102,6 +124,8 @@ public class LedgerActivity extends AppCompatActivity {
         openBalanceTxt=findViewById(R.id.openBalanceTxt);
         nodatafound=findViewById(R.id.nodatafound);
         closingBalanceTxt=findViewById(R.id.closingBalanceTxt);
+        layout_ledegr=findViewById(R.id.layout_ledegr);
+
         mProgressDialog = new ProgressDialog(LedgerActivity.this);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
@@ -118,11 +142,7 @@ public class LedgerActivity extends AppCompatActivity {
         shareAsPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-                mProgressDialog.setContentView(R.layout.progress_dialoge);
-                mProgressDialog.getWindow().setBackgroundDrawableResource(
-                        android.R.color.transparent);
+                Toast.makeText(getApplicationContext(), "Please wait pdf is preparing...", Toast.LENGTH_SHORT).show();
                 try {
 
 
@@ -261,27 +281,41 @@ public class LedgerActivity extends AppCompatActivity {
 
         Date c = Calendar.getInstance().getTime();
         String fieName=name.replace(" ","");
-        String newFilename=fieName.replace("/","_");
+        String newFilename=fieName.replace("/","");
         SimpleDateFormat df = new SimpleDateFormat("dd_mm_yyyy_hhmmss_s", Locale.getDefault());
+        Drawable drawable=getDrawable(R.drawable.bsn_without_shadow);
+        Bitmap bitmap= ((BitmapDrawable)drawable).getBitmap();
+        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+        byte[]  bitmapData=byteArrayOutputStream.toByteArray();
+        float headercolumnWidth[]={200f,700f};
+        ImageData data= ImageDataFactory.create(bitmapData);
+
+        Image img = new Image(data).scaleAbsolute(130, 80);
 
         String pdfPath= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file=new File(pdfPath,newFilename+df.format(c).toString()+"my.pdf");
+        File file=new File(pdfPath,newFilename.toString()+".pdf");
         OutputStream outputStream=new FileOutputStream(file);
         PdfWriter pdfWriter=new PdfWriter(file);
         PdfDocument pdfDocument=new PdfDocument(pdfWriter);
         Document document=new Document(pdfDocument);
         document.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        Paragraph companyName=new Paragraph("BSN Infotech Private limited"+"\n").setBold().setFontSize(20).setTextAlignment(TextAlignment.CENTER);
+        Paragraph companyName=new Paragraph().setTextAlignment(TextAlignment.CENTER);
+        Text companyName1=new Text("BSN Infotech Private limited"+"\n").setBold().setFontSize(24).setTextAlignment(TextAlignment.CENTER);
         Text location=new Text("Lucknow Branch"+"\n").setBold().setFontSize(15).setTextAlignment(TextAlignment.CENTER);
-        Text phEmai=new Text("Ph. No.: 0522-4959891"+"\t"+"Fax No.: 0522-4005977"+"\n").setTextAlignment(TextAlignment.CENTER).setFontSize(15);
+        Text phEmai=new Text("Ph. No.: 0522-4959891"+"\t"+"Fax No.: 0522-4005977").setTextAlignment(TextAlignment.CENTER).setFontSize(15);
         Paragraph report=new Paragraph("Ledger Reports of "+name+"\n").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(16).setUnderline();
         Paragraph dates=new Paragraph("From Date :"+fromdate+" To Date : "+todayDate);
-
+        companyName.add(companyName1);
         companyName.add(location);
         companyName.add(phEmai);
-        document.add(companyName);
-      document.add(report);
-      document.add(dates);
+        Table table1=new Table(headercolumnWidth);
+        table1.addCell(new Cell().add(img).setBorder(Border.NO_BORDER));
+        table1.addCell(new Cell().add(companyName).setBorder(Border.NO_BORDER));
+
+        document.add(table1);
+        document.add(report);
+        document.add(dates);
         float coloumnwidth[]={120f,140f,250f,148f,148f,148f,46f};
         Table table=new Table(coloumnwidth);
         table.addCell(new Cell(2,1).add(new Paragraph("Date").setBold().setTextAlignment(TextAlignment.CENTER)));
@@ -325,13 +359,23 @@ public class LedgerActivity extends AppCompatActivity {
 
         document.add( table);
         document.close();
-        mProgressDialog.hide();
-        Toast.makeText(getApplicationContext(), "pdf created", Toast.LENGTH_SHORT).show();
+      
+        Snackbar snackbar=Snackbar .make(layout_ledegr,"Your PDF is Downloaded, Click here to View", BaseTransientBottomBar.LENGTH_INDEFINITE)
+                .setAction("View", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i= new Intent(LedgerActivity.this,PdfViewer.class);
+                        i.putExtra("filename",newFilename+".pdf");
+                       startActivity(i);
+                    }
+                });
+        snackbar.show();
     }
 
     private void getLedgerData(String subcode, String todayDate, String fromdate, String comp_code, String getschoolCode, String site_code, String branchcode, String fyIdCode) {
         RestClient restClient=new RestClient();
         ApiService service=restClient.getApiService();
+
         Log.d("TAG", "getLedgerData: "+paraLedger("09",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         Call<List<Ledger_Helper>> call=service.getLedgerData(paraLedger("9",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         call.enqueue(new Callback<List<Ledger_Helper>>() {

@@ -51,12 +51,7 @@ public class AccountSummary extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
-        mProgressDialog = new ProgressDialog(AccountSummary.this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
-        mProgressDialog.setContentView(R.layout.progress_dialoge);
-        mProgressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent);
+
         action=i.getStringExtra("action");
         activityName=i.getStringExtra("name");
         TypefaceUtil fontChanger = new TypefaceUtil(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);

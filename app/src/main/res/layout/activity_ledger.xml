@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:id="@+id/layout_cashsummary"
+    android:id="@+id/layout_ledegr"
     tools:context=".LedgerActivity">
+
     <LinearLayout
         android:background="@color/backgroundlight"
         android:orientation="horizontal"
@@ -262,7 +263,8 @@
                         android:layout_height="40dp"
                         android:layout_marginStart="16dp"
                         android:backgroundTint="@color/colorPrimaryDark"
-                        android:text="share "
+                        android:text="Export As pdf "
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -307,28 +309,58 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
-        <LinearLayout
-            android:padding="5dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+
             android:layout_marginTop="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/nodatafound"
-                android:visibility="gone"
-                android:layout_marginTop="100dp"
-                android:layout_width="300dp"
 
+            <ImageView
+                android:id="@+id/nodatafound"
+                android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:src="@drawable/ic_nodatafound_svg"/>
+                android:layout_gravity="center"
+
+                android:src="@drawable/ic_nodatafound_svg"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/RecView_cashsummary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pdfExportProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:padding="40dp"
+
+                android:elevation="10dp"
+                android:background="#23535353"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/RecView_cashsummary"
+                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.498" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecView_cashsummary"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="none" />
-        </LinearLayout>
-
+                android:scrollbars="none"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

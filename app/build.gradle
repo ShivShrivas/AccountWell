@@ -67,6 +67,8 @@ dependencies {
 
     // uText pdf libray
     implementation 'com.itextpdf:itext7-core:7.1.8'
+    // pdf viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
 }
 

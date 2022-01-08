@@ -58,7 +58,7 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
             holder.cardLayout.setBackgroundColor(Color.rgb(234, 234, 234));
       }
 
-        AccountSummary.mProgressDialog.dismiss();
+
     }
 
 
