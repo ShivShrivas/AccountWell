@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -305,7 +308,7 @@ public class LedgerActivity extends AppCompatActivity {
         Text location=new Text("Lucknow Branch"+"\n").setBold().setFontSize(15).setTextAlignment(TextAlignment.CENTER);
         Text phEmai=new Text("Ph. No.: 0522-4959891"+"\t"+"Fax No.: 0522-4005977").setTextAlignment(TextAlignment.CENTER).setFontSize(15);
         Paragraph report=new Paragraph("Ledger Reports of "+name+"\n").setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(16).setUnderline();
-        Paragraph dates=new Paragraph("From Date :"+fromdate+" To Date : "+todayDate);
+        Paragraph dates=new Paragraph("From Date :"+fromDateTxt.getText()+" To Date : "+ToDateTxt.getText());
         companyName.add(companyName1);
         companyName.add(location);
         companyName.add(phEmai);
@@ -359,7 +362,14 @@ public class LedgerActivity extends AppCompatActivity {
 
         document.add( table);
         document.close();
-      
+        try {
+            Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                    + "://" + getApplicationContext().getPackageName()+"/"+ R.raw.notification);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), alarmSound);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Snackbar snackbar=Snackbar .make(layout_ledegr,"Your PDF is Downloaded, Click here to View", BaseTransientBottomBar.LENGTH_INDEFINITE)
                 .setAction("View", new View.OnClickListener() {
                     @Override
@@ -387,8 +397,8 @@ public class LedgerActivity extends AppCompatActivity {
                     listName.add(ledger_helpers.get(i).getName());
                     listBalance.add(ledger_helpers.get(i).getBalance());
                 }
-                openBalanceTxt.setText("₹"+ledger_helpers.get(0).getBalance());
-                closingBalanceTxt.setText("₹"+ledger_helpers.get(ledger_helpers.size()-1).getBalance());
+                openBalanceTxt.setText("₹"+ledger_helpers.get(0).getBalance()+ledger_helpers.get(0).getDRCR());
+                closingBalanceTxt.setText("₹"+ledger_helpers.get(ledger_helpers.size()-1).getBalance()+ledger_helpers.get(ledger_helpers.size()-1).getDRCR());
                 if (ledger_helpers.size()==2){
                     nodatafound.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
