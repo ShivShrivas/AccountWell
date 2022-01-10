@@ -55,7 +55,6 @@ public class CashSummary_Adapter extends ArrayAdapter<CashSummary_Helper> {
     public View getView(final int position, View convertView, ViewGroup parent ) {
         CashSummary_Adapter.ViewHolder holder = null;
         CashSummary_Helper rowItem = getItem(position);
-
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
@@ -63,7 +62,6 @@ public class CashSummary_Adapter extends ArrayAdapter<CashSummary_Helper> {
             Typeface typeFace = Typeface.createFromAsset(context.getAssets(),
                     "fonts/Nunito-SemiBold.ttf");
             holder = new CashSummary_Adapter.ViewHolder();
-
             holder.text_companyname =convertView.findViewById(R.id.text_companyname);
             holder.text_companyaddress =convertView.findViewById(R.id.text_companyaddress);
             holder.text_item = convertView.findViewById(R.id.text_item);
@@ -74,8 +72,6 @@ public class CashSummary_Adapter extends ArrayAdapter<CashSummary_Helper> {
             holder.text_amount_value =convertView.findViewById(R.id.text_amount_value);
             holder.text_qtyinbag =convertView.findViewById(R.id.text_qtyinbag);
             holder.text_qtyinbag_value =convertView.findViewById(R.id.text_qtyinbag_value);
-
-
             holder.text_companyname.setTypeface(typeFace);
             holder.text_companyaddress.setTypeface(typeFace);
             holder.text_item.setTypeface(typeFace);
@@ -86,12 +82,9 @@ public class CashSummary_Adapter extends ArrayAdapter<CashSummary_Helper> {
             holder.text_qtyinbag.setTypeface(typeFace);
             holder.text_qtyinbag_value.setTypeface(typeFace);
             holder.text_amount.setTypeface(typeFace);
-
             convertView.setTag(holder);
         } else
         holder = (CashSummary_Adapter.ViewHolder) convertView.getTag();
-
-
         holder.text_companyname.setText(rowItem.getCompname());
         holder.text_companyaddress.setText(rowItem.getCompAddress());
         return convertView;

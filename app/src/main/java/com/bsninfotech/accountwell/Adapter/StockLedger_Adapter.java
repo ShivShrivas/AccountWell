@@ -73,17 +73,13 @@ public class StockLedger_Adapter extends ArrayAdapter<BankSummary_Helper> {
             holder.text_date = convertView.findViewById(R.id.text_date);
             holder.text_amount =convertView.findViewById(R.id.text_amount);
             holder.image_down =convertView.findViewById(R.id.image_down);
-
             holder.text_companyname.setTypeface(typeFace);
             holder.text_balance.setTypeface(typeFace);
             holder.text_amount.setTypeface(typeFace);
             holder.text_date.setTypeface(typeFace);
-
-
             convertView.setTag(holder);
         } else
         holder = (StockLedger_Adapter.ViewHolder) convertView.getTag();
-
         holder.text_companyname.setText(rowItem.getCompname());
         if(rowItem.getPurpose().equalsIgnoreCase("Cr.")){
             holder.image_down.setImageResource(R.drawable.ic_arrow_down);
@@ -92,8 +88,6 @@ public class StockLedger_Adapter extends ArrayAdapter<BankSummary_Helper> {
             holder.image_down.setImageResource(R.drawable.ic_up_arrow);
             holder.text_amount.setText("5000");
         }
-
-
         return convertView;
     }
     public void filter(String charText) {

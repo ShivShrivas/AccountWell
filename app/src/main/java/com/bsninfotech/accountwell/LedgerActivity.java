@@ -293,9 +293,7 @@ public class LedgerActivity extends AppCompatActivity {
         byte[]  bitmapData=byteArrayOutputStream.toByteArray();
         float headercolumnWidth[]={200f,700f};
         ImageData data= ImageDataFactory.create(bitmapData);
-
         Image img = new Image(data).scaleAbsolute(130, 80);
-
         String pdfPath= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         File file=new File(pdfPath,newFilename.toString()+".pdf");
         OutputStream outputStream=new FileOutputStream(file);
@@ -321,6 +319,7 @@ public class LedgerActivity extends AppCompatActivity {
         document.add(dates);
         float coloumnwidth[]={120f,140f,250f,148f,148f,148f,46f};
         Table table=new Table(coloumnwidth);
+
         table.addCell(new Cell(2,1).add(new Paragraph("Date").setBold().setTextAlignment(TextAlignment.CENTER)));
         table.addCell(new Cell(2,1).add(new Paragraph("V-type/no.").setBold().setTextAlignment(TextAlignment.CENTER)));
         table.addCell(new Cell(2,1).add(new Paragraph("Name").setBold().setTextAlignment(TextAlignment.CENTER)));
@@ -328,13 +327,38 @@ public class LedgerActivity extends AppCompatActivity {
         table.addCell(new Cell(2,1).add(new Paragraph("Credit").setBold().setTextAlignment(TextAlignment.CENTER)));
         table.addCell(new Cell(2,1).add(new Paragraph("Balance").setBold().setTextAlignment(TextAlignment.CENTER)));
         table.addCell(new Cell(2,1).add(new Paragraph("Dr/Cr").setBold().setTextAlignment(TextAlignment.CENTER)));
-
+        String vtype = " ";
         for (int i=0;i<ledger_helpers.size();i++){
             String fullName = ledger_helpers.get(i).getName();
             String[] name = fullName.split("#");
             String balance=ledger_helpers.get(i).getBalance();
             String date=ledger_helpers.get(i).getDate();
-            String vtype=ledger_helpers.get(i).getV_Type()+"/"+ledger_helpers.get(i).getCvNo();
+            try {
+                if (!ledger_helpers.get(i).getV_Type().equals(null) && !ledger_helpers.get(i).getCvNo().equals(null)){
+
+                    vtype=ledger_helpers.get(i).getV_Type()+"/"+ledger_helpers.get(i).getCvNo();
+                }
+            }catch (NullPointerException e){
+                try {
+                    if(!ledger_helpers.get(i).getV_Type().equals(null) && ledger_helpers.get(i).getCvNo().equals(null)){
+                        vtype=ledger_helpers.get(i).getV_Type();
+                    }
+                }catch (NullPointerException exception){
+                    try {
+                        if (ledger_helpers.get(i).getV_Type().equals(null) && !ledger_helpers.get(i).getCvNo().equals(null))
+                        {
+                            vtype=ledger_helpers.get(i).getCvNo();
+
+                        }
+                    }catch (NullPointerException exception1){
+                        vtype=" ";
+
+                    }
+
+
+                }
+            }
+
             String debit=ledger_helpers.get(i).getDebitAmt();
             String credit=ledger_helpers.get(i).getCreditAmt();
             String dr_cr=ledger_helpers.get(i).getDRCR();;
