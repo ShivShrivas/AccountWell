@@ -3,6 +3,7 @@ package com.bsninfotech.accountwell;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bsninfotech.accountwell.Adapter.AccountSummaryAdapter;
 import com.bsninfotech.accountwell.Adapter.CashSummary_Adapter_New;
@@ -29,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class Debit_Frag extends Fragment {
     RecyclerView recyclerView;
     ApplicationControllerAdmin applicationControllerAdmin;
     EditText searchView;
+    TextView totalEntriesTxtDebit;
     CashSummary_Adapter_New cashSummary_adapter;
     ArrayList<CashsummaryHelper> cashsummaryHelpers = new ArrayList<>();
 
@@ -97,7 +101,19 @@ public class Debit_Frag extends Fragment {
         View view= inflater.inflate(R.layout.fragment_debit_, container, false);
         applicationControllerAdmin=(ApplicationControllerAdmin) getActivity().getApplication();
         recyclerView=view.findViewById(R.id.recVoewDebit);
+        totalEntriesTxtDebit=view.findViewById(R.id.totalEntriesTxtDebit);
         searchView=view.findViewById(R.id.searchViewDebit);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayout=((LinearLayoutManager)recyclerView.getLayoutManager());
+
+                totalEntriesTxtDebit.setText("Leaving "+linearLayout.findFirstCompletelyVisibleItemPosition()+" in "+(customers.size())+" entries");
+                Log.d("TAG", "onCreate: scroll "+linearLayout.findFirstCompletelyVisibleItemPosition());
+
+            }
+        });
         searchView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

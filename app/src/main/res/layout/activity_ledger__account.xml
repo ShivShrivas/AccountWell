@@ -47,6 +47,7 @@
                     </TextView>
 
                     <TextView
+                        android:id="@+id/fromdateTxtLedgerAccounts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="04-12-2019"
@@ -55,6 +56,7 @@
                         android:textSize="15dp"></TextView>
                 </LinearLayout>
                 <ImageView
+                    android:id="@+id/fromdateCalenderLedgerAccounts"
                     android:layout_weight="1.8"
                     android:src="@drawable/ic_calendar_leave"
                     android:layout_width="match_parent"
@@ -97,6 +99,7 @@
                             android:layout_height="wrap_content">
                         </TextView>
                         <TextView
+                            android:id="@+id/todateTxtLedgerAccounts"
                             android:textSize="15dp"
                             android:text="04-12-2019"
                             android:paddingStart="3dp"
@@ -106,6 +109,7 @@
                         </TextView>
                     </LinearLayout>
                     <ImageView
+                        android:id="@+id/todateCalenderLedgerAccounts"
                         android:layout_weight="1.8"
                         android:src="@drawable/ic_calendar_leave"
                         android:layout_width="match_parent"
@@ -122,93 +126,29 @@
         android:layout_height="1dp"
         android:layout_marginBottom="3dp"
         android:background="#858787" />
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/layout_search"
+        android:background="@drawable/bg_edit_brown"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
+        <EditText
+            android:id="@+id/searchViewLedger"
+            android:layout_width="match_parent"
             android:padding="5dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14dp"
-                    android:text="Account Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </TextView>
-                <LinearLayout
-                    android:background="@drawable/bg_edit_brown"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp">
-                    <Spinner
-                        android:entries="@array/array_bank"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1.2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:padding="5dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <CheckBox
-                    android:text="Entry Narration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <CheckBox
-                    android:text="Voucher Narration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </LinearLayout>
+            android:hint="Search Here..."
+
+            android:background="@drawable/bg_edit_rec"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-        <LinearLayout
-            android:gravity="center|end"
-            android:layout_weight="1.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/button_credit"
-                android:textColor="#fff"
-                android:background="@drawable/login_button_style"
-                android:text="search"
-                android:layout_width="120dp"
-                android:layout_height="30dp">
-            </Button>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp">
@@ -249,6 +189,17 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/listDivider" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -259,13 +210,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:gravity="center|start"
+                    android:gravity="center|end"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
                         android:gravity="start"
+                        android:layout_marginRight="10dp"
                         android:textColor="@color/colorAccent"
                         android:textSize="18dp"
                         android:text="₹ 500000"
@@ -273,12 +225,13 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:gravity="center|start"
+                    android:gravity="center|end"
                     android:layout_weight="2"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:layout_marginRight="10dp"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/ic_arrow_down"
                         android:textSize="14dp"
@@ -298,8 +251,8 @@
         android:text="All Transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ListView
-        android:id="@+id/list_ledger_account"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recView_ledger_account"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

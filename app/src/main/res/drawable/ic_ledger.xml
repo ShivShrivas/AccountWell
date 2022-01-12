@@ -13,7 +13,7 @@
       android:fillColor="@color/colorPrimary"
       android:pathData="m100,272h16v16h-16zM100,272"/>
   <path
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorPrimaryDark"
       android:pathData="m164,336h16v80h-16zM164,336"/>
   <path
       android:fillColor="@color/colorPrimary"

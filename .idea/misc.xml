@@ -78,7 +78,7 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/splashbggradient.xml" value="0.240625" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/technical_support_card_bg.xml" value="0.22552083333333334" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/trans_gradiant_green.xml" value="0.240625" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/account_item_card.xml" value="0.2127501853224611" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/account_item_card.xml" value="0.2903846153846154" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_account__reports.xml" value="0.22" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_account_summary.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_bank__summary.xml" value="0.22447916666666667" />
@@ -87,8 +87,8 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_creditor_summary.xml" value="0.18" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_general__trial__balance.xml" value="0.22447916666666667" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_labourpayment__report.xml" value="0.221025641025641" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger.xml" value="0.33" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger__account.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger.xml" value="0.25" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger__account.xml" value="0.22" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login__type.xml" value="0.18" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login_actitivty.xml" value="0.22" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -110,10 +110,11 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/fragment_debit_.xml" value="0.22" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_banksummary.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_cashsummary.xml" value="0.5" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_labourlist.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_salereport.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_stockledger.xml" value="0.67" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/item_vash_summary_new.xml" value="0.25" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/ledger_item_card.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/ledger_item_card.xml" value="0.30628803245436104" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/progress_dialoge.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/referral_dialoglayout.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/spinner_class_item.xml" value="0.209375" />

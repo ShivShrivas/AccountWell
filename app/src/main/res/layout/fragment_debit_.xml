@@ -29,10 +29,23 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/totalEntriesTxtDebit"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchViewDebit" />
+        <TextView
+            android:id="@+id/totalEntriesTxtDebit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:padding="2dp"
+            android:paddingEnd="5dp"
+            android:text="Showing 1 to 2 of 2 entries"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

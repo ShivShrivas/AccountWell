@@ -3,6 +3,7 @@ package com.bsninfotech.accountwell;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bsninfotech.accountwell.Adapter.AccountSummaryAdapter;
 import com.bsninfotech.accountwell.Adapter.CashSummary_Adapter_New;
@@ -61,6 +63,7 @@ public class Credit_Frag extends Fragment {
     List<Accounts_Helper> customers=new ArrayList<>();
     AccountSummaryAdapter adapter;
     String action,activityName;
+    TextView totalEntriesTxtCredit;
     public Credit_Frag() {
         // Required empty public constructor
     }
@@ -99,6 +102,19 @@ public class Credit_Frag extends Fragment {
         applicationControllerAdmin=(ApplicationControllerAdmin) getActivity().getApplication();
         recyclerView = view.findViewById(R.id.recViewCredit);
         searchView=view.findViewById(R.id.searchViewCredit);
+        totalEntriesTxtCredit=view.findViewById(R.id.totalEntriesTxtCredit);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayout=((LinearLayoutManager)recyclerView.getLayoutManager());
+                int size=0;
+
+                totalEntriesTxtCredit.setText("Leaving "+linearLayout.findFirstCompletelyVisibleItemPosition()+" in "+(customers.size())+" entries");
+                Log.d("TAG", "onCreate: scroll "+linearLayout.findFirstCompletelyVisibleItemPosition());
+
+            }
+        });
         searchView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

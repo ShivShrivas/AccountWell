@@ -70,21 +70,7 @@ public class Account_Reports extends AppCompatActivity {
             }
         });
 
-        LinearLayout layout_interest_reg=findViewById(R.id.layout_interest_reg);
-        layout_interest_reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-
-        LinearLayout layout_fund_flow=findViewById(R.id.layout_fundflow);
-        layout_fund_flow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         LinearLayout layout_group_trial=findViewById(R.id.layout_group_trial);
         layout_group_trial.setOnClickListener(new View.OnClickListener() {

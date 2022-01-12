@@ -165,7 +165,7 @@
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/colorAccent"
                         android:textSize="16dp"
-                        android:text="₹ 1,500000"
+                        android:text="₹ 00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -216,7 +216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="start"
-                            android:text="₹ 500000"
+                            android:text="₹ 00"
                             android:textColor="@color/colorAccent"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -275,10 +275,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:checked="true"
                         android:onClick="narrationStatus"
-                        android:text="Show Narrations"
 
+                        android:text="Show Narrations"
                         android:textAlignment="textEnd"
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -350,16 +351,28 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecView_cashsummary"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
+                android:layout_height="0dp"
+
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/totalEntriesTxt"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/totalEntriesTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:padding="2dp"
+                android:paddingEnd="5dp"
+                android:text="Showing 1 to 2 of 2 entries"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

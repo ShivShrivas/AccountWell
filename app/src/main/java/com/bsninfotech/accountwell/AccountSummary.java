@@ -1,5 +1,6 @@
 package com.bsninfotech.accountwell;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,14 +10,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bsninfotech.accountwell.Adapter.AccountSummaryAdapter;
 import com.bsninfotech.accountwell.Const.CustomTypefaceSpan;
 import com.bsninfotech.accountwell.Const.TypefaceUtil;
 import com.bsninfotech.accountwell.Helper.Accounts_Helper;
+import com.bsninfotech.accountwell.Helper.Ledger_Helper;
 import com.bsninfotech.accountwell.Model.ServerApi;
 import com.bsninfotech.accountwell.RetrofitSetup.ApiService;
 import com.bsninfotech.accountwell.RetrofitSetup.RestClient;
@@ -34,6 +40,8 @@ public class AccountSummary extends AppCompatActivity {
     List<Accounts_Helper> accounts_helpers=new ArrayList<>();
     RecyclerView AccountSummaryRecView;
     AccountSummaryAdapter adapter;
+    EditText searchViewAccount;
+    TextView totalEntriesTxtAccountas;
     String action,activityName;
     public static ProgressDialog mProgressDialog;
 
@@ -51,7 +59,8 @@ public class AccountSummary extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i=getIntent();
-
+        searchViewAccount=findViewById(R.id.searchViewAccount);
+        totalEntriesTxtAccountas=findViewById(R.id.totalEntriesTxtAccountas);
         action=i.getStringExtra("action");
         activityName=i.getStringExtra("name");
         TypefaceUtil fontChanger = new TypefaceUtil(getAssets(), "fonts/" + ServerApi.FONT_DASHBOARD);
@@ -61,8 +70,46 @@ public class AccountSummary extends AppCompatActivity {
         str.setSpan (new CustomTypefaceSpan("",font2), 0, str.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         getSupportActionBar().setTitle(str);
         AccountSummaryRecView=findViewById(R.id.AccountSummaryRecView);
+        searchViewAccount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString().trim());
+            }
+        });
         getAccountsList();
+        AccountSummaryRecView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayout=((LinearLayoutManager)AccountSummaryRecView.getLayoutManager());
+                totalEntriesTxtAccountas.setText("Leaving "+linearLayout.findFirstCompletelyVisibleItemPosition()+" in "+(accounts_helpers.size())+" entries");
+                        Log.d("TAG", "onCreate: scroll "+linearLayout.findFirstCompletelyVisibleItemPosition());
+
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<Accounts_Helper> filteredList = new ArrayList<>();
+
+
+        for (Accounts_Helper item : accounts_helpers) {
+            if ( item.getName().contains(text)) {
+                filteredList.add(item);
+            }
+        }
+        adapter.filterList(filteredList);
+        adapter.notifyDataSetChanged();
     }
 
     private void getAccountsList() {

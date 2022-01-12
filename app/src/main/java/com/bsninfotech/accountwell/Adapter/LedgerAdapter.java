@@ -2,6 +2,8 @@ package com.bsninfotech.accountwell.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
     @Override
     public void onBindViewHolder(@NonNull LedgerViewHolder holder, int position) {
+
             if(ledger_helpers.get(position).getName().equals(" Opening Balance") || ledger_helpers.get(position).getName().equals("Closing Balance") ){
 
                 holder.itemView.setBackgroundColor(Color.rgb(234, 234, 234));
@@ -60,7 +63,8 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
                 String[] name = fullName.split("#");
                 holder.txtVType.setText(ledger_helpers.get(position).getDate());
                 holder.textTransactionName.setText(name[0].trim());
-                holder.textTransactionName.setTextSize(19);
+                holder.textTransactionName.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                holder.textTransactionName.setTypeface(null, Typeface.BOLD);
                 if (i==0){
                     try {
                         holder.textTransactionDesc.setText(name[1]);
@@ -74,26 +78,44 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
                 holder.txtAmmountbalance.setText("Balance: ₹" + ledger_helpers.get(position).getBalance()+""+ledger_helpers.get(position).getDRCR());
                 if (ledger_helpers.get(position).getCreditAmt().equals("-") && !ledger_helpers.get(position).getDebitAmt().equals("-")) {
-                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getDebitAmt());
-                    holder.creditOrDebitTxt.setText("Dr.");
-                    holder.transactionAmount.setTextSize(19);
-                    holder.creditOrDebitTxt.setTextSize(19);
 
                     holder.creditOrDebitTxt.setTextColor(Color.rgb(8,89,11));
                     holder.transactionAmount.setTextColor(Color.rgb(8,89,11));
+                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getDebitAmt());
+                    holder.creditOrDebitTxt.setText("Dr.");
+                    holder.transactionAmount.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                    holder.creditOrDebitTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+
+
                 } else if (ledger_helpers.get(position).getDebitAmt().equals("-") && !ledger_helpers.get(position).getCreditAmt().equals("-")) {
-                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getCreditAmt());
-                    holder.creditOrDebitTxt.setText("Cr.");
-                    holder.transactionAmount.setTextSize(19);
-                    holder.creditOrDebitTxt.setTextSize(19);
                     holder.creditOrDebitTxt.setTextColor(Color.RED);
                     holder.transactionAmount.setTextColor(Color.RED);
+                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getCreditAmt());
+                    holder.creditOrDebitTxt.setText("Cr.");
+                    holder.transactionAmount.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                    holder.creditOrDebitTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+
                 } else {
-                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getBalance());
-                    holder.creditOrDebitTxt.setText(ledger_helpers.get(position).getDRCR());
-                    holder.transactionAmount.setTextSize(19);
-                    holder.creditOrDebitTxt.setTextSize(19);
-                }
+                    if (ledger_helpers.get(position).getDRCR().equals("Dr.")){
+                        holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getBalance());
+                        holder.creditOrDebitTxt.setText(ledger_helpers.get(position).getDRCR());
+                        holder.transactionAmount.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                        holder.creditOrDebitTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                        holder.creditOrDebitTxt.setTextColor(Color.rgb(8,89,11));
+                        holder.transactionAmount.setTextColor(Color.rgb(8,89,11));
+                        holder.creditOrDebitTxt.setTypeface(null, Typeface.BOLD);
+                        holder.transactionAmount.setTypeface(null, Typeface.BOLD);
+                    }else {
+                        holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getBalance());
+                        holder.creditOrDebitTxt.setText(ledger_helpers.get(position).getDRCR());
+                        holder.transactionAmount.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                        holder.creditOrDebitTxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
+                        holder.creditOrDebitTxt.setTextColor(Color.RED);
+                        holder.transactionAmount.setTextColor(Color.RED);
+                        holder.creditOrDebitTxt.setTypeface(null, Typeface.BOLD);
+                        holder.transactionAmount.setTypeface(null, Typeface.BOLD);
+                    }
+                  }
             }else {
 
                 String fullName = ledger_helpers.get(position).getName();
@@ -145,6 +167,11 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
         LedgerActivity.mProgressDialog.dismiss();
     }
 
+    private int coverPixelToDP(int i) {
+        final float scale = applicationContext.getResources().getDisplayMetrics().density;
+        return (int) (i * scale);
+    }
+
 
     @Override
     public int getItemCount() {
@@ -152,11 +179,12 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
     }
 
     public class LedgerViewHolder extends RecyclerView.ViewHolder {
-        TextView txtVType,textVNo,textTransactionName,textTransactionDesc,txtAmmountbalance,transactionAmount,creditOrDebitTxt,txtDateTranscation;
-     ;
+        TextView txtVType,textVNo,srNo,textTransactionName,textTransactionDesc,txtAmmountbalance,transactionAmount,creditOrDebitTxt,txtDateTranscation;
+
         public LedgerViewHolder(@NonNull View itemView) {
             super(itemView);
             textTransactionName=itemView.findViewById(R.id.textTransactionNameledger);
+
             textTransactionDesc=itemView.findViewById(R.id.textTransactionDescledger);
             txtAmmountbalance=itemView.findViewById(R.id.txtAmmountbalanceledger);
             txtVType=itemView.findViewById(R.id.txtVTypeledger);

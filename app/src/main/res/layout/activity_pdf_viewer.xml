@@ -8,5 +8,11 @@
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        app:barrierAllowsGoneWidgets="true"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollIndicators="right"
+        android:scrollbarSize="5dp"
+        android:scrollbarFadeDuration="@integer/material_motion_duration_long_2"
         android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

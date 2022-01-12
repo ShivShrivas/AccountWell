@@ -19,6 +19,7 @@ import com.bsninfotech.accountwell.Helper.Accounts_Helper;
 import com.bsninfotech.accountwell.LedgerActivity;
 import com.bsninfotech.accountwell.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAdapter.AccountViewHolder> {
@@ -50,6 +51,7 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
               applicationContext.startActivity(i);
           }
       });
+
       if (position%2==0){
           holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
 
@@ -68,12 +70,18 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
         return accounts_helpers.size();
     }
 
+    public void filterList(ArrayList<Accounts_Helper> filteredList) {
+        accounts_helpers = filteredList;
+        notifyDataSetChanged();
+    }
+
     public class AccountViewHolder extends RecyclerView.ViewHolder {
-        TextView accountCardtxt;
+        TextView accountCardtxt,srNoId;
         ConstraintLayout cardLayout;
         public AccountViewHolder(@NonNull View itemView) {
             super(itemView);
             accountCardtxt=itemView.findViewById(R.id.accountCardtxt);
+
             cardLayout=itemView.findViewById(R.id.cardLayout);
         }
     }

@@ -1,5 +1,6 @@
 package com.bsninfotech.accountwell;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,7 +83,7 @@ public class LedgerActivity extends AppCompatActivity {
     String todayDate,fromdate;
     public  static String openingBAlance;
     public  static String closingBalance;
-    TextView closingBalanceTxt,openBalanceTxt;
+    TextView closingBalanceTxt,openBalanceTxt,totalEntriesTxt;
     String subcode,name;
     LedgerAdapter adapter;
     ProgressDialog progressBar;
@@ -121,6 +122,7 @@ public class LedgerActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(LedgerActivity.this);
         toDateCalender=findViewById(R.id.toDateCalLedger);
         ToDateTxt=findViewById(R.id.toDateTxtledger);
+        totalEntriesTxt=findViewById(R.id.totalEntriesTxt);
         searchViewLedger=findViewById(R.id.searchViewLedger);
         recyclerView=findViewById(R.id.RecView_cashsummary);
         checkBoxLedger_Narration=findViewById(R.id.checkBoxLedger_Narration);
@@ -272,6 +274,17 @@ public class LedgerActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayout=((LinearLayoutManager)recyclerView.getLayoutManager());
+                totalEntriesTxt.setText("Leaving "+linearLayout.findFirstCompletelyVisibleItemPosition()+" in "+(ledger_helpers.size())+" entries");
+                Log.d("TAG", "onCreate: scroll "+linearLayout.findFirstCompletelyVisibleItemPosition());
 
             }
         });

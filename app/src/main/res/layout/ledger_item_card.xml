@@ -14,8 +14,8 @@
         app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
             android:id="@+id/linearLayout6"
@@ -26,13 +26,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textTransactionNameledger"
@@ -95,7 +97,6 @@
                     android:gravity="right"
                     android:maxLines="2"
                     android:text="500"
-                    android:textColor="#161616"
                     android:textSize="16dp"></TextView>
 
                 <TextView
@@ -105,7 +106,7 @@
                     android:layout_weight="1"
                     android:text="Cr."
                     android:textSize="16dp"
-                    android:textStyle="italic" />
+                    />
 
             </LinearLayout>
         </LinearLayout>
