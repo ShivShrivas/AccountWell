@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     ApplicationControllerAdmin applicationController;
     Typeface typeFace;
     Animation slideUp;
-    CircleImageView profileImage;
+    CircleImageView profileImage,notification;
     TextView lastLogin,designationTxt,textUserName,companyNameTxt,currentDate_in_mainActivity;
     SharedPreferences sharedpreferences;
     private Calendar calendar;
@@ -79,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         applicationController= (ApplicationControllerAdmin) getApplication();
+        try {
+            if (applicationController.getUserID() == null) {
+                finish();
+            }
+        }catch (Exception e){
+            finish();
+        }
+
         getSupportActionBar().hide();
         Window window = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -97,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         profileImage=findViewById(R.id.image_student_dashboard);
+        notification=findViewById(R.id.notification);
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
         lastLogin=findViewById(R.id.lastLogin);
@@ -122,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true))
                 .into(profileImage);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,Notifications.class));
+            }
+        });
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

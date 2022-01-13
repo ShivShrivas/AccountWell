@@ -73,6 +73,7 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/layout_click_style.xml" value="0.240625" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/layout_grey.xml" value="0.240625" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/login_button_style.xml" value="0.240625" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/main_top_gradient_shadow.xml" value="0.22552083333333334" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/profile_background_gradient.xml" value="0.22552083333333334" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/ripple_effect.xml" value="0.240625" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/drawable/splashbggradient.xml" value="0.240625" />
@@ -91,8 +92,9 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_ledger__account.xml" value="0.22" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login__type.xml" value="0.18" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_login_actitivty.xml" value="0.22" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_main.xml" value="0.2037037037037037" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_multiple__ledger__account.xml" value="0.22447916666666667" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_notifications.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.209375" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_purchase_report.xml" value="0.221025641025641" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_sale__reports.xml" value="0.22447916666666667" />
@@ -101,7 +103,7 @@
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_stock_summary_new.xml" value="0.20454545454545456" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_transactions_summary.xml" value="0.14601769911504425" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_turnover.xml" value="0.18" />
-        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_user_profile.xml" value="0.22" />
+        <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/cell.xml" value="0.221025641025641" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/cell_content_layout.xml" value="0.22447916666666667" />
         <entry key="..\:/AccountWellAndroid_23122020/AccountWell/app/src/main/res/layout/dialog_company_code.xml" value="0.33" />

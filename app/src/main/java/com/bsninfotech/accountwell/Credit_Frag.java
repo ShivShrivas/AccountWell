@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bsninfotech.accountwell.Adapter.AccountSummaryAdapter;
 import com.bsninfotech.accountwell.Adapter.CashSummary_Adapter_New;
+import com.bsninfotech.accountwell.Adapter.LedgerAdapter;
 import com.bsninfotech.accountwell.Helper.Accounts_Helper;
 import com.bsninfotech.accountwell.Helper.CashsummaryHelper;
 import com.bsninfotech.accountwell.Model.ServerApi;
@@ -155,6 +156,7 @@ public class Credit_Frag extends Fragment {
                         accounts_helper1.setSubCode(accounts_helpers.get(i).getSubCode());
                         customers.add(accounts_helper1);
                     }
+
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter=new AccountSummaryAdapter(getContext(),R.layout.account_item_card,customers);

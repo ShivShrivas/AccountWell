@@ -17,17 +17,32 @@
         android:layout_marginBottom="60dp"
         android:orientation="vertical"
         android:visibility="visible">
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:background="@drawable/layout_bg"
     android:layout_width="match_parent"
+    android:backgroundTintMode="src_over"
     android:layout_height="230dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_top_gradient_shadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimary"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29000002">
 
 
         <LinearLayout
@@ -44,12 +59,12 @@
                 android:id="@+id/currentDate_in_mainActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="WELCOME ,"
-                android:visibility="gone"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:textColor="#ffff"
                 android:layout_marginStart="5dp"
-                android:textSize="18dp" />
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="WELCOME ,"
+                android:textColor="#ffff"
+                android:textSize="18dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/companyNameTxt"
@@ -58,9 +73,9 @@
                 android:singleLine="true"
                 android:text="BSN Infotech Pvt. Ltd."
                 android:textColor="#fff"
-                android:visibility="gone"
                 android:textSize="19dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,9 +99,9 @@
                 android:id="@+id/textUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="1dp"
                 android:singleLine="true"
-                android:layout_marginStart="5dp"
                 android:text="Mr. Gaurav Nigam"
                 android:textColor="#fff"
                 android:textSize="20dp"
@@ -97,10 +112,10 @@
                 android:id="@+id/designationTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:singleLine="true"
                 android:text="Designation - Admin"
                 android:textColor="#fff"
-                android:layout_marginStart="5dp"
                 android:textSize="12dp"
                 android:textStyle="bold" />
 
@@ -108,9 +123,9 @@
                 android:id="@+id/lastLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginStart="5dp"
                 android:singleLine="true"
                 android:text="Last Login: 24-12-2021"
                 android:textColor="#fff"
@@ -126,35 +141,36 @@
             android:gravity="center|top|right"
             android:orientation="horizontal"
             android:padding="5dp">
-<RelativeLayout
-    android:layout_weight="1.9"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/notification"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:elevation="10dp"
-        android:src="@drawable/notification"
-        app:civ_border_color="@color/cardview_dark_background" />
-</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.9">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/notification"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="10dp"
+                    android:src="@drawable/notification"
+                    app:civ_border_color="@color/cardview_dark_background" />
+            </RelativeLayout>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1.9"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1.9">
 
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/online_icon"
                     android:elevation="15dp" />
 
@@ -162,17 +178,17 @@
                     android:id="@+id/image_student_dashboard"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:padding="3dp"
-                    android:background="@drawable/circle_background"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp" />
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/circle_background"
+                    android:padding="3dp" />
             </RelativeLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.cardview.widget.CardView

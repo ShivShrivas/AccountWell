@@ -38,6 +38,15 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.account_item_card,parent,false);
        return new AccountViewHolder(view);
     }
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull AccountViewHolder holder, @SuppressLint("RecyclerView") int position) {

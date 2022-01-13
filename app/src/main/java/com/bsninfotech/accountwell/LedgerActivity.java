@@ -439,6 +439,7 @@ public class LedgerActivity extends AppCompatActivity {
                 if (ledger_helpers.size()==2){
                     nodatafound.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
+                    totalEntriesTxt.setVisibility(View.GONE);
                     LedgerActivity.mProgressDialog.dismiss();
                 }else {
                     nodatafound.setVisibility(View.GONE);
