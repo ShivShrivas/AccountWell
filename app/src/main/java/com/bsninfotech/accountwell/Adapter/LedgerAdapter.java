@@ -61,7 +61,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
                 holder.itemView.setBackgroundColor(Color.rgb(234, 234, 234));
                 String fullName = ledger_helpers.get(position).getName();
                 String[] name = fullName.split("#");
-                holder.txtVType.setText(ledger_helpers.get(position).getDate());
+                holder.txtVType.setText("As on: "+ledger_helpers.get(position).getDate());
                 holder.textTransactionName.setText(name[0].trim());
                 holder.textTransactionName.setTextSize(TypedValue.COMPLEX_UNIT_PX, applicationContext.getResources().getDimensionPixelSize(R.dimen.edTxt_text_size));
                 holder.textTransactionName.setTypeface(null, Typeface.BOLD);
@@ -167,10 +167,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
         LedgerActivity.mProgressDialog.dismiss();
     }
 
-    private int coverPixelToDP(int i) {
-        final float scale = applicationContext.getResources().getDisplayMetrics().density;
-        return (int) (i * scale);
-    }
+
 
 
     @Override

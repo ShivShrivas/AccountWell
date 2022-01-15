@@ -1,21 +1,30 @@
 package com.bsninfotech.accountwell;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -96,6 +105,7 @@ public class LedgerActivity extends AppCompatActivity {
     List<Ledger_Helper> ledger_helpers=new ArrayList<>();
     RecyclerView recyclerView;
     EditText searchViewLedger;
+    public static final int REQUEST_EXTERNAL_PERMISSION_CODE = 666;
     ProgressDialog progressDialog;
     ProgressBar pdfExportProgressBar;
     private boolean narrationStatus=true;
@@ -143,21 +153,27 @@ public class LedgerActivity extends AppCompatActivity {
         subcode=i.getStringExtra("SubCode");
         name=i.getStringExtra("Name");
         getSupportActionBar().setTitle(name);
-        Log.d("TAG", "onCreate: "+subcode);
+
+//////////////CODE FOR PDF PREPARING AND DOWNLOADING PDFs IN DOWNLOADS FOLDER OF PHONE MEMORY///////////////////////////
         shareAsPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+        if (checkExternalStoragePermission(LedgerActivity.this)){
+            try {
                 Toast.makeText(getApplicationContext(), "Please wait pdf is preparing...", Toast.LENGTH_SHORT).show();
-                try {
+
+                createPdf();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.d("TAG", "onClick: "+e.getMessage());
+            }
+        }
 
 
 
-                    createPdf();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
             }
         });
+        /////////////code for searching//////////////////
         searchViewLedger.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -292,13 +308,52 @@ public class LedgerActivity extends AppCompatActivity {
 
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public static final String[] PERMISSIONS_EXTERNAL_STORAGE = {
+            READ_EXTERNAL_STORAGE,
+            WRITE_EXTERNAL_STORAGE
+    };
 
+    public boolean checkExternalStoragePermission(Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            return true;
+        }
+
+        int readStoragePermissionState = ContextCompat.checkSelfPermission(activity, READ_EXTERNAL_STORAGE);
+        int writeStoragePermissionState = ContextCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE);
+        boolean externalStoragePermissionGranted = readStoragePermissionState == PackageManager.PERMISSION_GRANTED &&
+                writeStoragePermissionState == PackageManager.PERMISSION_GRANTED;
+        if (!externalStoragePermissionGranted) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(PERMISSIONS_EXTERNAL_STORAGE, REQUEST_EXTERNAL_PERMISSION_CODE);
+            }
+        }
+
+        return externalStoragePermissionGranted;
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (requestCode == REQUEST_EXTERNAL_PERMISSION_CODE) {
+                if (checkExternalStoragePermission(LedgerActivity.this)) {
+                    try {
+                        createPdf();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
     private void createPdf() throws FileNotFoundException {
 
         Date c = Calendar.getInstance().getTime();
         String fieName=name.replace(" ","");
+        SimpleDateFormat df = new SimpleDateFormat("dd_MM_yyyy_hhmmss_s", Locale.getDefault());
         String newFilename=fieName.replace("/","");
-        SimpleDateFormat df = new SimpleDateFormat("dd_mm_yyyy_hhmmss_s", Locale.getDefault());
+        String finalFileName=newFilename+df.format(c);
         Drawable drawable=getDrawable(R.drawable.bsn_without_shadow);
         Bitmap bitmap= ((BitmapDrawable)drawable).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
@@ -308,7 +363,8 @@ public class LedgerActivity extends AppCompatActivity {
         ImageData data= ImageDataFactory.create(bitmapData);
         Image img = new Image(data).scaleAbsolute(130, 80);
         String pdfPath= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file=new File(pdfPath,newFilename.toString()+".pdf");
+        File file=new File(pdfPath,finalFileName+".pdf");
+        Log.d("TAG", "createPdf:file "+file.getAbsolutePath()+file.getName());
         OutputStream outputStream=new FileOutputStream(file);
         PdfWriter pdfWriter=new PdfWriter(file);
         PdfDocument pdfDocument=new PdfDocument(pdfWriter);
@@ -397,7 +453,7 @@ public class LedgerActivity extends AppCompatActivity {
         }
 
 
-        document.add( table);
+        document.add(table);
         document.close();
         try {
             Uri alarmSound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
@@ -412,23 +468,21 @@ public class LedgerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent i= new Intent(LedgerActivity.this,PdfViewer.class);
-                        i.putExtra("filename",newFilename+".pdf");
+                        i.putExtra("filename",finalFileName+".pdf");
                        startActivity(i);
                     }
                 });
         snackbar.show();
     }
-
+ ////////////////////////////get the data of any account/////////////////////////////////
     private void getLedgerData(String subcode, String todayDate, String fromdate, String comp_code, String getschoolCode, String site_code, String branchcode, String fyIdCode) {
         RestClient restClient=new RestClient();
         ApiService service=restClient.getApiService();
 
-        Log.d("TAG", "getLedgerData: "+paraLedger("09",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         Call<List<Ledger_Helper>> call=service.getLedgerData(paraLedger("9",comp_code,branchcode,getschoolCode,site_code,fyIdCode,fromdate,todayDate,subcode,"1","1"));
         call.enqueue(new Callback<List<Ledger_Helper>>() {
             @Override
             public void onResponse(Call<List<Ledger_Helper>> call, Response<List<Ledger_Helper>> response) {
-                Log.d("TAG", "onResponse:ledger "+response.body());
                 ledger_helpers=response.body();
                 for (int i=0;i<ledger_helpers.size();i++){
                     listName.add(ledger_helpers.get(i).getName());
