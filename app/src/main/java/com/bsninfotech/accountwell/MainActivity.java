@@ -191,40 +191,49 @@ public class MainActivity extends AppCompatActivity {
         layout_analyticreport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Analytic_Report.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Analytic_Report.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sorry!, this is not working now...", Toast.LENGTH_SHORT).show();
+
             }
         });
         LinearLayout layout_salereport = findViewById(R.id.layout_salereportdashboard);
         layout_salereport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Sale_Reports.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Sale_Reports.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sorry!, this is not working now...", Toast.LENGTH_SHORT).show();
+
             }
         });
         LinearLayout layout_purchase = findViewById(R.id.layout_purchase);
         layout_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Purchase_Reports.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Purchase_Reports.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sorry!, this is not working now...", Toast.LENGTH_SHORT).show();
+
             }
         });
         LinearLayout layout_labpayment = findViewById(R.id.layout_labpayment);
         layout_labpayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Labourpayment_Report.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Labourpayment_Report.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sorry!, this is not working now...", Toast.LENGTH_SHORT).show();
+
             }
         });
         LinearLayout Account_Reports = findViewById(R.id.layout_AccountReports);
         Account_Reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Account_Reports.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, Account_Reports.class);
+//                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Sorry!, this is not working now...", Toast.LENGTH_SHORT).show();
             }
         });
         LinearLayout more_setting = findViewById(R.id.layout_more_setting);

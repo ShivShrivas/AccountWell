@@ -17,7 +17,7 @@
     <string name="company">Company</string>
     <string name="site">Site</string>
     <string name="submit">submit</string>
-    <string name="cash_summary">Account Summary</string>
+    <string name="cash_summary">Cash Summary</string>
     <string name="bank_summary">Bank Summary</string>
     <string name="stock_summary">Stock Summary</string>
     <string name="creditor_summary">Sundry Summary</string>
