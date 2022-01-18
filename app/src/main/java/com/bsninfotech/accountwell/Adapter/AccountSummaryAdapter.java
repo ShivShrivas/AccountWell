@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +64,14 @@ public class AccountSummaryAdapter extends RecyclerView.Adapter<AccountSummaryAd
       });
 
       if (position%2==0){
-          holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
+          SpannableString content = new SpannableString(accounts_helpers.get(position).getName());
+          content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+          holder.accountCardtxt.setText(content);
 
       }else {
-          holder.accountCardtxt.setText(accounts_helpers.get(position).getName());
+          SpannableString content = new SpannableString(accounts_helpers.get(position).getName());
+          content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+          holder.accountCardtxt.setText(content);
             holder.cardLayout.setBackgroundColor(Color.rgb(234, 234, 234));
       }
 

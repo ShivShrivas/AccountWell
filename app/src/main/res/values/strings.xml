@@ -61,4 +61,5 @@
     <string name="for_technical_support">For technical support</string>
     <string name="call_us">Call us:</string>
     <string name="email_us">Email us:</string>
+    <string name="hiii"><u>Underlined text</u></string>
 </resources>
