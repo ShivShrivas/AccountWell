@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_loginbg_svg"
-    android:orientation="vertical"
-    android:id="@+id/login_layout"
 
+    android:id="@+id/login_layout"
     tools:context=".Login_Actitivty">
 
 
@@ -19,7 +18,7 @@
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:gravity="center"
-                android:layout_weight="2.5"
+                android:layout_weight="2.2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -42,10 +41,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fillViewport="true">
+
                     <LinearLayout
                         android:padding="45dp"
                         android:orientation="vertical"
@@ -169,7 +165,8 @@
                             android:layout_marginTop="20dp"
                             android:background="@drawable/login_button_style"
                             android:text="@string/login"
-                            android:textColor="#fff" />
+                            android:textColor="#fff"
+                            android:keyboardNavigationCluster="true"/>
 
                         <TextView
                             android:id="@+id/forgetpassword"
@@ -193,7 +190,7 @@
                             android:layout_height="wrap_content"/>
 
                     </LinearLayout>
-                </ScrollView>
+
 
 
 

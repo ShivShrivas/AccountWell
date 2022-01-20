@@ -118,7 +118,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login_Actitivty"
-
+            android:windowSoftInputMode="adjustPan"
         android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
