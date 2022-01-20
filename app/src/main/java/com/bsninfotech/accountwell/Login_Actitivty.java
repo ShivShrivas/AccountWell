@@ -1,6 +1,7 @@
 package com.bsninfotech.accountwell;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.Dialog;
@@ -78,7 +79,8 @@ public class Login_Actitivty extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
     ApplicationControllerAdmin applicationController;
-    LinearLayout loginlayout,compCodelayout;
+    LinearLayout compCodelayout;
+    LinearLayout loginlayout;
     Context context;
     String regId,InstitutionType,BranchWebsite,AVer;
     CheckBox check_remember;
@@ -128,14 +130,17 @@ public class Login_Actitivty extends AppCompatActivity {
                 showdialog();
             }
         });
-        school_code = sch_code + branch_code;
-        getMainUrl(school_code);
-        txtCompanyCode.setText(school_code);
+
         if (sch_code.equals("")) {
             compCodelayout.setVisibility(View.GONE);
+            Log.d("TAG", "onResponse: "+"sp Empty");
+
             showdialog();
         } else {
             compCodelayout.setVisibility(View.VISIBLE);
+            school_code = sch_code + branch_code;
+            getMainUrl(school_code);
+            txtCompanyCode.setText(school_code);
             applicationController.setschoolCode(sch_code);
             applicationController.setBranchcode(branch_code);
         }
@@ -377,11 +382,14 @@ public class Login_Actitivty extends AppCompatActivity {
 
                        Log.d(TAG, "onResponse: ++ "+ ApplicationControllerAdmin.getServicesapplication());
                    }else {
+                       Log.d("TAG", "onResponse: "+"elsecode");
                        Toast.makeText(getApplicationContext(), "Please enter School code", Toast.LENGTH_SHORT).show();
                        showdialog();
                    }
 
                 }else {
+                    Log.d("TAG", "onResponse: "+"2ndelsecode");
+
                     Toast.makeText(getApplicationContext(), "Somthing went wrong!, Please retry", Toast.LENGTH_SHORT).show();
                     showdialog();
                 }
@@ -392,6 +400,7 @@ public class Login_Actitivty extends AppCompatActivity {
          public void onFailure(Call<List<JsonObject>> call, Throwable t) {
              Toast.makeText(getApplicationContext(), "Somthing went wrong!, Please retry", Toast.LENGTH_SHORT).show();
              showdialog();
+             Log.d("TAG", "onResponse: "+"onfailure");
 
          }
      });
@@ -601,7 +610,6 @@ public class Login_Actitivty extends AppCompatActivity {
                 }else if(school_code.length()==4){
                     sch_code=school_code.substring(0,2);
                     String branch_code=school_code.substring(2,4);
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("sch_code", sch_code);
                     editor.putString("branch_code", branch_code);
                     editor.commit();
@@ -615,10 +623,9 @@ public class Login_Actitivty extends AppCompatActivity {
                 }else if(school_code.length()==6){
                     sch_code=school_code.substring(0,4);
                     String branch_code=school_code.substring(4,6);
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("sch_code", sch_code);
                     editor.putString("branch_code", branch_code);
-                    editor.commit();
+                    editor.apply();
                     txtCompanyCode.setText(school_code);
                     compCodelayout.setVisibility(View.VISIBLE);
                     applicationController.setschoolCode(sch_code);

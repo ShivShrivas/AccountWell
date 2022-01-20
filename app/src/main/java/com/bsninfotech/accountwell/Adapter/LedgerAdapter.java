@@ -147,7 +147,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
                     holder.transactionAmount.setTextColor(Color.rgb(8,89,11));
                 } else if (ledger_helpers.get(position).getDebitAmt().equals("-") && !ledger_helpers.get(position).getCreditAmt().equals("-")) {
                     holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getCreditAmt());
-                    holder.DrCrledger.setText("Cr.");
+                    holder.DrCrledger.setText("Cr.  ");
                     holder.DrCrledger.setTextColor(Color.RED);
                     holder.transactionAmount.setTextColor(Color.RED);
                 } else if(!ledger_helpers.get(position).getDebitAmt().equals("-") && !ledger_helpers.get(position).getCreditAmt().equals("-")){
