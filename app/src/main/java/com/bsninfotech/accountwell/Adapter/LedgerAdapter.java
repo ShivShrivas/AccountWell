@@ -75,9 +75,9 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
                 holder.VTypeLayout.setVisibility(View.GONE);
                 String fullName = ledger_helpers.get(position).getName();
                 String[] name = fullName.split("#");
-                holder.textDateView.setVisibility(View.GONE);
+
                 holder.textTransactionName.setVisibility(View.GONE);
-                holder.DrCrledger.setVisibility(View.GONE);
+
                 if (i==0){
                     try {
                         holder.textTransactionDesc.setVisibility(View.GONE);
@@ -117,9 +117,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
                 String fullName = ledger_helpers.get(position).getName();
                 String[] name = fullName.split("#");
-                holder.textDateView.setText(ledger_helpers.get(position).getDate());
-                holder.txtVNoledger.setText(ledger_helpers.get(position).getCvNo());
-                holder.txtVType.setText( ledger_helpers.get(position).getV_Type());
+                holder.txtVType.setText( ledger_helpers.get(position).getDate()+" || "+ledger_helpers.get(position).getV_Type()+" || "+ledger_helpers.get(position).getCvNo());
                 holder.textTransactionName.setText(name[0]);
                 if (i==0){
                     try {
@@ -140,19 +138,15 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
 
                 }
                 if (ledger_helpers.get(position).getCreditAmt().equals("-") && !ledger_helpers.get(position).getDebitAmt().equals("-")) {
-                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getDebitAmt());
-                    holder.DrCrledger.setText("Dr.");
-                    holder.DrCrledger.setTextColor(Color.rgb(8,89,11));
+                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getDebitAmt()+"Dr.");
 
                     holder.transactionAmount.setTextColor(Color.rgb(8,89,11));
                 } else if (ledger_helpers.get(position).getDebitAmt().equals("-") && !ledger_helpers.get(position).getCreditAmt().equals("-")) {
-                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getCreditAmt());
-                    holder.DrCrledger.setText("Cr.  ");
-                    holder.DrCrledger.setTextColor(Color.RED);
+                    holder.transactionAmount.setText("₹" + ledger_helpers.get(position).getCreditAmt()+"Cr.");
                     holder.transactionAmount.setTextColor(Color.RED);
                 } else if(!ledger_helpers.get(position).getDebitAmt().equals("-") && !ledger_helpers.get(position).getCreditAmt().equals("-")){
                     holder.transactionAmount.setText(ledger_helpers.get(position).getDebitAmt()+"Dr."+"\n"+ledger_helpers.get(position).getCreditAmt()+"Cr.");
-                    holder.DrCrledger.setVisibility(View.GONE);
+
 
                     holder.transactionAmount.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 }
@@ -177,7 +171,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
     }
 
     public class LedgerViewHolder extends RecyclerView.ViewHolder {
-        TextView txtVType,txtVNoledger,DrCrledger,textTransactionName,transactionAmountOpneCloseledger,txtOpeningdateTxt,txtOpeningBalance,textDateView,textTransactionDesc,txtAmmountbalance,transactionAmount,txtDateTranscation;
+        TextView txtVType,textTransactionName,transactionAmountOpneCloseledger,txtOpeningdateTxt,txtOpeningBalance,textTransactionDesc,txtAmmountbalance,transactionAmount;
         LinearLayout layourBalance,VTypeLayout,openCloseLayout,transactionLayout;
         public LedgerViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -189,14 +183,13 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.LedgerView
             txtOpeningBalance=itemView.findViewById(R.id.txtOpeningBalance);
             VTypeLayout=itemView.findViewById(R.id.VTypeLayout);
             layourBalance=itemView.findViewById(R.id.layourBalance);
-            DrCrledger=itemView.findViewById(R.id.DrCrledger);
+
 
             textTransactionDesc=itemView.findViewById(R.id.textTransactionDescledger);
             txtAmmountbalance=itemView.findViewById(R.id.txtAmmountbalanceledger);
             txtVType=itemView.findViewById(R.id.txtVTypeledger);
-            txtVNoledger=itemView.findViewById(R.id.txtVNoledger);
+
             transactionAmount=itemView.findViewById(R.id.transactionAmountledger);
-            textDateView=itemView.findViewById(R.id.textDateView);
 
         }
     }

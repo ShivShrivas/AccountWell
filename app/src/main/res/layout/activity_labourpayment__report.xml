@@ -46,9 +46,9 @@
                         android:layout_height="45dp">
 
                         <Spinner
-                            android:entries="@array/array_bank"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:entries="@array/array_bank" />
 
                     </LinearLayout>
 
