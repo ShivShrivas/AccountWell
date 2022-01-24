@@ -334,22 +334,28 @@ public class Login_Actitivty extends AppCompatActivity {
            @Override
            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
 
+               if(response.body().size()>0)
+               {
+                   //array is empty 
+                    if (response!=null && !response.body().get(0).get("userid").toString().equals("null")){
+                                      Log.d("TAG", "onResponse:uid "+response.body().get(0).get("userid").toString());
 
-               if (response!=null && !response.body().get(0).get("userid").toString().equals("null")){
-                   Log.d("TAG", "onResponse:uid "+response.body().get(0).get("userid").toString());
+                                          Log.d("TAG", "onResponse: "+response.body().get(0).get("userid"));
+                                          applicationController.setUserID(response.body().get(0).get("userid").toString());
+                                          applicationController.setLoginType(response.body().get(0).get("loginTypeId").toString());
+                                          applicationController.setFyID(response.body().get(0).get("financialYear").toString());
 
-                       Log.d("TAG", "onResponse: "+response.body().get(0).get("userid"));
-                       applicationController.setUserID(response.body().get(0).get("userid").toString());
-                       applicationController.setLoginType(response.body().get(0).get("loginTypeId").toString());
-                       applicationController.setFyID(response.body().get(0).get("financialYear").toString());
+                                                       editor.putString("lastLogin",response.body().get(0).get("LastLogin").getAsString());
+                                                       editor.commit();
+                                          startActivity(new Intent(Login_Actitivty.this,Login_Type.class));
 
-                                    editor.putString("lastLogin",response.body().get(0).get("LastLogin").getAsString());
-                                    editor.commit();
-                       startActivity(new Intent(Login_Actitivty.this,Login_Type.class));
-
-                    }else{
-                   Toast.makeText(getApplicationContext(), "Please enter correct credential ", Toast.LENGTH_SHORT).show();
+                                       }else{
+                                      Toast.makeText(getApplicationContext(), "Please enter correct credential ", Toast.LENGTH_SHORT).show();
+                                  }
+               }else{
+                   Toast.makeText(getApplicationContext(), "Somthing went wrong!!!", Toast.LENGTH_SHORT).show();
                }
+            
            }
 
            @Override
