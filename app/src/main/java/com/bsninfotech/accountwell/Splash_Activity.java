@@ -61,7 +61,7 @@ public class Splash_Activity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash_Activity.this, Login_Actitivty.class);
+                Intent intent = new Intent(Splash_Activity.this, dashboard_for_headoffice.class);
 
                     startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);

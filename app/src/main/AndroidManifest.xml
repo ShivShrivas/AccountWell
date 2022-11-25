@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:name=".ApplicationControllerAdmin"
+        android:name="com.bsninfotech.accountwell.ApplicationControllerAdmin"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,10 +34,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Notifications"
+            android:name="com.bsninfotech.accountwell.dashboard_for_headoffice"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.bsninfotech.accountwell.Notifications"
             android:exported="false" />
         <activity
-            android:name=".PdfViewer"
+            android:name="com.bsninfotech.accountwell.PdfViewer"
             android:exported="false"
             android:screenOrientation="portrait" />
 
@@ -52,82 +59,82 @@
         </provider>
 
         <activity
-            android:name=".LedgerActivity"
+            android:name="com.bsninfotech.accountwell.LedgerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AccountSummary"
+            android:name="com.bsninfotech.accountwell.AccountSummary"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Stock_Summary_new"
+            android:name="com.bsninfotech.accountwell.Stock_Summary_new"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Transactions_Summary"
+            android:name="com.bsninfotech.accountwell.Transactions_Summary"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Creditor_Summary"
+            android:name="com.bsninfotech.accountwell.Creditor_Summary"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CashSummary"
+            android:name="com.bsninfotech.accountwell.CashSummary"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserProfile"
+            android:name="com.bsninfotech.accountwell.UserProfile"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".General_Trial_Balance"
+            android:name="com.bsninfotech.accountwell.General_Trial_Balance"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Multiple_Ledger_Account"
+            android:name="com.bsninfotech.accountwell.Multiple_Ledger_Account"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Ledger_Account"
+            android:name="com.bsninfotech.accountwell.Ledger_Account"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Account_Reports"
+            android:name="com.bsninfotech.accountwell.Account_Reports"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Labourpayment_Report"
+            android:name="com.bsninfotech.accountwell.Labourpayment_Report"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Sale_Reports"
+            android:name="com.bsninfotech.accountwell.Sale_Reports"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Analytic_Report"
+            android:name="com.bsninfotech.accountwell.Analytic_Report"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Stock_Ledger"
+            android:name="com.bsninfotech.accountwell.Stock_Ledger"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Stock_Summary"
+            android:name="com.bsninfotech.accountwell.Stock_Summary"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Bank_Summary"
+            android:name="com.bsninfotech.accountwell.Bank_Summary"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Cash_Summary"
+            android:name="com.bsninfotech.accountwell.Cash_Summary"
             android:screenOrientation="portrait" />
-        <activity android:name=".Login_Type" />
+        <activity android:name="com.bsninfotech.accountwell.Login_Type" />
         <activity
-            android:name=".Turnover_Activity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Login_Actitivty"
-            android:windowSoftInputMode="adjustPan"
-        android:screenOrientation="portrait" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.bsninfotech.accountwell.Turnover_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Purchase_Reports"
+            android:name="com.bsninfotech.accountwell.Login_Actitivty"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.bsninfotech.accountwell.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Splash_Activity"
+            android:name="com.bsninfotech.accountwell.Purchase_Reports"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.bsninfotech.accountwell.Splash_Activity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -138,14 +145,14 @@
         </activity>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name="com.bsninfotech.accountwell.MyFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".MyFirebaseInstanceIDService"
+            android:name="com.bsninfotech.accountwell.MyFirebaseInstanceIDService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

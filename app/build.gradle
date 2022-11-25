@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.bsninfotech.accountwell"
         minSdkVersion 21
@@ -24,9 +23,14 @@ android {
         sourceCompatibility = "8"
     }
     packagingOptions {
-        pickFirst 'com/itextpdf/io/font/*'
-        pickFirst 'com/itextpdf/io/font/cmap/*'
+        jniLibs {
+            pickFirsts += ['com/itextpdf/io/font/*', 'com/itextpdf/io/font/cmap/*']
+        }
+        resources {
+            pickFirsts += ['com/itextpdf/io/font/*', 'com/itextpdf/io/font/cmap/*']
+        }
     }
+
 }
 
 repositories {
